@@ -9,6 +9,7 @@
     left: 0;
     top: 0;
     z-index: 100;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.02);
   }
 
   &__header {
@@ -24,11 +25,14 @@
   &__logo {
     margin: 0;
     color: #1890ff;
+    font-size: 20px;
+    font-weight: 600;
   }
 
   &__subtitle {
     font-size: 12px;
     color: #8c8c8c;
+    font-weight: 400;
   }
 
   &__actions {
@@ -38,13 +42,15 @@
 
   &__icon {
     font-size: 18px;
+    color: #595959;
   }
 
   &__menu {
     border-right: 0;
-    height: calc(100vh - 140px);
+    height: calc(100vh - 200px);
     overflow: auto;
     background: transparent;
+    padding-top: 8px;
 
     .ant-menu-item-group-title {
       color: #8c8c8c;
@@ -53,30 +59,45 @@
       letter-spacing: 0.5px;
       padding: 16px 16px 8px;
       text-transform: uppercase;
+      line-height: 1.5;
     }
 
     .ant-menu-item {
       border-radius: 6px;
-      margin: 4px 12px;
+      margin: 2px 12px;
       width: calc(100% - 24px);
+      height: 40px;
+      line-height: 40px;
+      padding-left: 16px !important;
       
       &:hover {
         background-color: #f5f5f5;
+        color: #262626;
       }
 
       &.ant-menu-item-selected {
         background-color: #e6f7ff;
         color: #1890ff;
+        font-weight: 500;
         
         &::after {
           display: none;
         }
+
+        .anticon {
+          color: #1890ff;
+        }
+      }
+
+      .anticon {
+        font-size: 16px;
+        color: #8c8c8c;
       }
     }
 
     .ant-menu-item-group-list {
       .ant-menu-item {
-        padding-left: 24px !important;
+        padding-left: 16px !important;
       }
     }
   }
@@ -86,7 +107,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    padding: 16px;
+    padding: 12px 16px;
     border-top: 1px solid #f0f0f0;
     background: #fff;
   }
@@ -98,6 +119,9 @@
   &__avatar {
     background-color: #722ed1;
     flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    font-size: 12px;
   }
 
   &__profile-info {
@@ -107,16 +131,19 @@
   &__profile-name {
     font-size: 14px;
     display: block;
+    line-height: 1.4;
   }
 
   &__profile-role {
     font-size: 12px;
     color: #8c8c8c;
+    line-height: 1.4;
   }
 
   &__help-icon {
     color: #8c8c8c;
     flex-shrink: 0;
+    font-size: 18px;
   }
 
   &__content-wrapper {
