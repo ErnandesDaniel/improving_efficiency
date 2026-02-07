@@ -20,6 +20,7 @@ import {
   BulbOutlined,
   LineChartOutlined,
   WarningOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
 import { Virtuoso } from 'react-virtuoso';
 import './index.scss';
@@ -39,6 +40,11 @@ interface InsightCard {
   type: 'focus' | 'plan' | 'risk';
   title: string;
   items: string[];
+}
+
+interface AIChatProps {
+  isMobile?: boolean;
+  onClose?: () => void;
 }
 
 const mockInsights: InsightCard[] = [
@@ -80,7 +86,7 @@ const initialMessages: Message[] = [
   },
 ];
 
-export default function AIChat() {
+export default function AIChat({ isMobile = false, onClose }: AIChatProps) {
   const [activeTab, setActiveTab] = useState('assistant');
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState<Message[]>(initialMessages);
@@ -148,7 +154,12 @@ export default function AIChat() {
   };
 
   return (
-    <Card className="ai-chat" bordered={false}>
+    <Card className={`ai-chat ${isMobile ? 'ai-chat--mobile' : ''}`} bordered={false}>
+      {isMobile && onClose && (
+        <Flex justify="flex-end" style={{ padding: '8px 16px' }}>
+          <Button type="text" icon={<CloseOutlined />} onClick={onClose} />
+        </Flex>
+      )}
       <Tabs
         activeKey={activeTab}
         onChange={setActiveTab}

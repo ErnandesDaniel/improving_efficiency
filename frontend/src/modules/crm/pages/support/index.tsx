@@ -165,7 +165,7 @@ const columns = [
     title: 'Действия',
     key: 'actions',
     render: () => (
-      <Space>
+      <Space wrap size={[8, 8]}>
         <Tooltip title="Добавить задачу">
           <Button type="text" icon={<CalendarOutlined />} size="small" />
         </Tooltip>
@@ -197,7 +197,7 @@ export default function SupportPage() {
       </Row>
 
       <Card style={{ marginBottom: 24 }}>
-        <Space wrap>
+        <Space wrap size={[8, 8]}>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
@@ -208,9 +208,9 @@ export default function SupportPage() {
         </Space>
       </Card>
 
-      <Row gutter={16} style={{ marginBottom: 24 }}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         {statsCards.map((card, index) => (
-          <Col key={index} span={4}>
+          <Col key={index} xs={12} sm={8} md={6} lg={4}>
             <Card>
               <Text type="secondary" style={{ fontSize: 12 }}>
                 {card.title}
@@ -226,12 +226,16 @@ export default function SupportPage() {
       </Row>
 
       <Card>
-        <Table
-          dataSource={supportData}
-          columns={columns}
-          rowKey="id"
-          pagination={{ pageSize: 10 }}
-        />
+        <div style={{ overflowX: 'auto' }}>
+          <Table
+            dataSource={supportData}
+            columns={columns}
+            rowKey="id"
+            scroll={{ x: 800 }}
+            size="small"
+            pagination={{ pageSize: 10, size: 'small' }}
+          />
+        </div>
       </Card>
     </div>
   );

@@ -152,9 +152,9 @@ export default function EmployeesPage() {
         </Space>
       </Card>
 
-      <Row gutter={[24, 24]}>
+      <Row gutter={[16, 16]}>
         {employeesData.map((employee) => (
-          <Col key={employee.id} span={6}>
+          <Col key={employee.id} xs={12} sm={8} md={6} lg={6}>
             <EmployeeCard employee={employee} />
           </Col>
         ))}

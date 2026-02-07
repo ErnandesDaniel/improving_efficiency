@@ -155,9 +155,9 @@ export default function TrainingPage() {
 
       <Tabs defaultActiveKey="courses">
         <TabPane tab="Курсы" key="courses">
-          <Row gutter={[24, 24]}>
+          <Row gutter={[16, 16]}>
             {coursesData.map((course) => (
-              <Col key={course.id} span={6}>
+              <Col key={course.id} xs={24} sm={12} md={8} lg={6}>
                 <CourseCard course={course} />
               </Col>
             ))}

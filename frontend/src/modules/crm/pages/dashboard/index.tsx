@@ -130,9 +130,9 @@ export default function DashboardPage() {
         <Title level={5} style={{ marginBottom: 16 }}>
           План от куратора на месяц
         </Title>
-        <Row gutter={32}>
+        <Row gutter={[16, 16]}>
           {statsCards.map((card, index) => (
-            <Col key={index} span={6}>
+            <Col key={index} xs={12} sm={12} md={6} lg={6}>
               <div>
                 <Text type="secondary" style={{ fontSize: 12 }}>
                   {card.title}
@@ -175,8 +175,8 @@ export default function DashboardPage() {
       </Card>
 
       {/* Рекомендуем к изучению и Скоро платежи */}
-      <Row gutter={24} style={{ marginBottom: 24 }}>
-        <Col span={12}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} md={12}>
           <Card title="Рекомендуем к изучению">
             <List
               itemLayout="horizontal"
@@ -202,7 +202,7 @@ export default function DashboardPage() {
             />
           </Card>
         </Col>
-        <Col span={12}>
+        <Col xs={24} md={12}>
           <Card title="Скоро платежи">
             <List
               itemLayout="horizontal"
@@ -232,8 +232,8 @@ export default function DashboardPage() {
       </Row>
 
       {/* План по образованию и Мои начисления */}
-      <Row gutter={24} style={{ marginBottom: 24 }}>
-        <Col span={12}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} md={12}>
           <Card title="План по образованию">
             <Progress percent={84} status="active" strokeColor="#52c41a" />
             <Row justify="space-between" style={{ marginTop: 8 }}>
@@ -250,7 +250,7 @@ export default function DashboardPage() {
             </Row>
           </Card>
         </Col>
-        <Col span={12}>
+        <Col xs={24} md={12}>
           <Card title="Мои начисления">
             <Row gutter={16}>
               <Col span={8}>
@@ -315,9 +315,9 @@ export default function DashboardPage() {
           </Button>
         }
       >
-        <Row gutter={16}>
+        <Row gutter={[8, 8]}>
           {newsItems.map((item) => (
-            <Col key={item.id} span={4}>
+            <Col key={item.id} xs={24} sm={12} md={8} lg={6} xl={4}>
               <div style={{ padding: 12, background: '#f6ffed', borderRadius: 8 }}>
                 <Tag color="green">{item.tag}</Tag>
                 <Text style={{ display: 'block', marginTop: 8, fontSize: 12 }}>

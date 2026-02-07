@@ -158,7 +158,7 @@ export default function DealsPage() {
       </Row>
 
       <Card style={{ marginBottom: 24 }}>
-        <Space wrap>
+        <Space wrap size={[8, 8]}>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
@@ -175,9 +175,9 @@ export default function DealsPage() {
         </Space>
       </Card>
 
-      <Row gutter={16} style={{ marginBottom: 24 }}>
+      <Row gutter={[8, 8]} style={{ marginBottom: 24 }}>
         {statsCards.map((card, index) => (
-          <Col key={index} span={4}>
+          <Col key={index} xs={12} sm={8} md={6} lg={4}>
             <Card>
               <Text type="secondary" style={{ fontSize: 12 }}>
                 {card.title}
@@ -192,12 +192,14 @@ export default function DealsPage() {
         ))}
       </Row>
 
-      <Card>
+      <Card style={{ overflowX: 'auto' }}>
         <Table
           dataSource={dealsData}
           columns={columns}
           rowKey="id"
-          pagination={{ pageSize: 10 }}
+          pagination={{ pageSize: 10, size: 'small' }}
+          scroll={{ x: 800 }}
+          size="small"
         />
       </Card>
     </div>

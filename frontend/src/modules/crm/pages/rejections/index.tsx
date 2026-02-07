@@ -175,7 +175,7 @@ const columns = [
     title: 'Действия',
     key: 'actions',
     render: () => (
-      <Space>
+      <Space wrap size={[8, 8]}>
         <Tooltip title="Добавить задачу">
           <Button type="text" icon={<CalendarOutlined />} size="small" />
         </Tooltip>
@@ -197,7 +197,7 @@ export default function RejectionsPage() {
           </Title>
         </Col>
         <Col>
-          <Space>
+          <Space wrap size={[8, 8]}>
             <Button icon={<UploadOutlined />}>Импортировать</Button>
             <Button type="primary" icon={<PlusOutlined />}>
               Добавить
@@ -207,7 +207,7 @@ export default function RejectionsPage() {
       </Row>
 
       <Card style={{ marginBottom: 24 }}>
-        <Space>
+        <Space wrap size={[8, 8]}>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
@@ -216,9 +216,9 @@ export default function RejectionsPage() {
         </Space>
       </Card>
 
-      <Row gutter={16} style={{ marginBottom: 24 }}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         {statsCards.map((card, index) => (
-          <Col key={index} span={6}>
+          <Col key={index} xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary" style={{ fontSize: 12 }}>
                 {card.title}
@@ -234,12 +234,16 @@ export default function RejectionsPage() {
       </Row>
 
       <Card>
-        <Table
-          dataSource={rejectionsData}
-          columns={columns}
-          rowKey="id"
-          pagination={{ pageSize: 10 }}
-        />
+        <div style={{ overflowX: 'auto' }}>
+          <Table
+            dataSource={rejectionsData}
+            columns={columns}
+            rowKey="id"
+            scroll={{ x: 800 }}
+            size="small"
+            pagination={{ pageSize: 10, size: 'small' }}
+          />
+        </div>
       </Card>
     </div>
   );

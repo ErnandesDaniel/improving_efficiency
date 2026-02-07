@@ -151,7 +151,7 @@ export default function CatalogPage() {
       </Title>
 
       <Card style={{ marginBottom: 24 }}>
-        <Space>
+        <Space wrap size={[8, 8]}>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
@@ -165,9 +165,9 @@ export default function CatalogPage() {
         </Space>
       </Card>
 
-      <Row gutter={[24, 24]}>
+      <Row gutter={[16, 16]}>
         {productsData.map((product) => (
-          <Col key={product.id} span={6}>
+          <Col key={product.id} xs={24} sm={12} md={8} lg={6}>
             <ProductCard product={product} />
           </Col>
         ))}

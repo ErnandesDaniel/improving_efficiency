@@ -13,6 +13,14 @@
   z-index: 99;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.05);
 
+  &--mobile {
+    width: 100%;
+    right: 0;
+    z-index: 1000;
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+
   &__tabs {
     flex: 1;
     display: flex;

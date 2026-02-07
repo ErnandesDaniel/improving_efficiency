@@ -26,7 +26,7 @@ const statsCards = [
 ];
 
 const funnelData = [
-  { stage: 'Новые лиды', count: 148 },
+  { stage: 'Новые клиенты', count: 148 },
   { stage: 'Квалификация', count: 43 },
   { stage: 'КП', count: 1 },
   { stage: 'Переговоры', count: 1 },
@@ -53,9 +53,9 @@ export default function AnalyticsPage() {
       </Row>
 
       {/* Статистика */}
-      <Row gutter={16} style={{ marginBottom: 24 }}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         {statsCards.map((card, index) => (
-          <Col key={index} span={4}>
+          <Col key={index} xs={12} sm={8} md={6} lg={4}>
             <Card>
               <Statistic
                 title={<Text style={{ fontSize: 12 }}>{card.title}</Text>}
@@ -68,8 +68,8 @@ export default function AnalyticsPage() {
       </Row>
 
       {/* Графики */}
-      <Row gutter={24} style={{ marginBottom: 24 }}>
-        <Col span={8}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} md={8}>
           <Card title="Скоро закроются">
             <div style={{ textAlign: 'center', padding: '40px 0' }}>
               <Progress
@@ -82,7 +82,7 @@ export default function AnalyticsPage() {
             </div>
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} md={8}>
           <Card title="Угроза срыва">
             <div style={{ textAlign: 'center', padding: '40px 0' }}>
               <Progress
@@ -95,7 +95,7 @@ export default function AnalyticsPage() {
             </div>
           </Card>
         </Col>
-        <Col span={8}>
+        <Col xs={24} md={8}>
           <Card title="Воронка по сделке">
             <div style={{ padding: '20px 0' }}>
               {funnelData.map((item, index) => (
@@ -118,8 +118,8 @@ export default function AnalyticsPage() {
       </Row>
 
       {/* Прогноз выполнения плана */}
-      <Row gutter={24} style={{ marginBottom: 24 }}>
-        <Col span={12}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} md={12}>
           <Card title="Новые сделки по месяцам">
             <div style={{ height: 200, background: '#f5f5f5', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Text type="secondary">График (в разработке)</Text>
@@ -132,7 +132,7 @@ export default function AnalyticsPage() {
             </Row>
           </Card>
         </Col>
-        <Col span={12}>
+        <Col xs={24} md={12}>
           <Card title="Закрыто / Сорвалось по месяцам">
             <div style={{ height: 200, background: '#f5f5f5', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Text type="secondary">График (в разработке)</Text>

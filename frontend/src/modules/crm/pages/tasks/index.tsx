@@ -86,14 +86,14 @@ export default function TasksPage() {
 
   return (
     <div className="tasks-page">
-      <Row justify="space-between" align="middle" style={{ marginBottom: 24 }}>
-        <Col>
+      <Row justify="space-between" align="middle" gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Col xs={24} md={12}>
           <Title level={2} style={{ margin: 0 }}>
             Задачи
           </Title>
         </Col>
-        <Col>
-          <Space>
+        <Col xs={24} md={12}>
+          <Space wrap>
             <Button icon={<SettingOutlined />}>Настройки</Button>
             <Button type="primary" icon={<PlusOutlined />}>
               Создать
@@ -103,7 +103,7 @@ export default function TasksPage() {
       </Row>
 
       <Card style={{ marginBottom: 24 }}>
-        <Space>
+        <Space wrap>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
@@ -119,14 +119,14 @@ export default function TasksPage() {
         </Space>
       </Card>
 
-      <Row justify="space-between" align="middle" style={{ marginBottom: 16 }}>
-        <Col>
+      <Row justify="space-between" align="middle" gutter={[16, 16]} style={{ marginBottom: 16 }}>
+        <Col xs={24} md={12}>
           <Title level={4} style={{ margin: 0 }}>
             {currentDate.format('MMMM YYYY')}
           </Title>
         </Col>
-        <Col>
-          <Space>
+        <Col xs={24} md={12}>
+          <Space wrap>
             <Button.Group>
               <Button icon={<ArrowLeftOutlined />} />
               <Button>Сегодня</Button>

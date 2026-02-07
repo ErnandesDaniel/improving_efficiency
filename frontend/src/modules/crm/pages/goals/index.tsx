@@ -21,29 +21,29 @@ export default function GoalsPage() {
         Ваши планы на период
       </Text>
 
-      <Row gutter={24}>
-        <Col span={12}>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} md={12}>
           <Card title="Квартал">
             <Row gutter={16}>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Лиды</Text>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Клиенты</Text>
                 </div>
                 <Text strong style={{ fontSize: 24 }}>30</Text>
               </Col>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
                   <Text type="secondary" style={{ fontSize: 12 }}>КП</Text>
                 </div>
                 <Text strong style={{ fontSize: 24 }}>15</Text>
               </Col>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
                   <Text type="secondary" style={{ fontSize: 12 }}>Договоры</Text>
                 </div>
                 <Text strong style={{ fontSize: 24 }}>10</Text>
               </Col>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
                   <Text type="secondary" style={{ fontSize: 12 }}>Сборы</Text>
                 </div>
@@ -52,28 +52,28 @@ export default function GoalsPage() {
             </Row>
           </Card>
         </Col>
-        <Col span={12}>
+        <Col xs={24} md={12}>
           <Card title="Год">
             <Row gutter={16}>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Лиды</Text>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Клиенты</Text>
                 </div>
                 <Text strong style={{ fontSize: 24 }}>120</Text>
               </Col>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
                   <Text type="secondary" style={{ fontSize: 12 }}>КП</Text>
                 </div>
                 <Text strong style={{ fontSize: 24 }}>60</Text>
               </Col>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
                   <Text type="secondary" style={{ fontSize: 12 }}>Договоры</Text>
                 </div>
                 <Text strong style={{ fontSize: 24 }}>40</Text>
               </Col>
-              <Col span={6}>
+              <Col xs={12} sm={6}>
                 <div style={{ marginBottom: 8 }}>
                   <Text type="secondary" style={{ fontSize: 12 }}>Сборы</Text>
                 </div>

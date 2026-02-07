@@ -75,7 +75,7 @@ export default function NewsPage() {
         <TabPane tab="Компания" key="company">
           <Row gutter={[24, 24]}>
             {newsData.map((item) => (
-              <Col key={item.id} span={6}>
+              <Col key={item.id} xs={24} sm={12} md={8} lg={6}>
                 <NewsCard item={item} />
               </Col>
             ))}

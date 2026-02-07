@@ -157,9 +157,9 @@ export default function PaymentsPage() {
         Начисления
       </Title>
 
-      <Row gutter={24} style={{ marginBottom: 24 }}>
+      <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
         {statsCards.map((card, index) => (
-          <Col key={index} span={6}>
+          <Col key={index} xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary" style={{ fontSize: 12 }}>
                 {card.title}
@@ -182,12 +182,16 @@ export default function PaymentsPage() {
           </Button.Group>
         }
       >
-        <Table
-          dataSource={paymentsData}
-          columns={columns}
-          rowKey="id"
-          pagination={{ pageSize: 10 }}
-        />
+        <div style={{ overflowX: 'auto' }}>
+          <Table
+            dataSource={paymentsData}
+            columns={columns}
+            rowKey="id"
+            scroll={{ x: 1000 }}
+            size="small"
+            pagination={{ pageSize: 10, size: 'small' }}
+          />
+        </div>
       </Card>
     </div>
   );
