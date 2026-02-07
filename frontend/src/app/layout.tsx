@@ -12,8 +12,8 @@ import {AntdRegistry} from "@ant-design/nextjs-registry";
 import NotificationProvider from "@/components/providers/notification-provider";
 
 export const metadata: Metadata = {
-    title: "Фокус Solid",
-    description: "Фокус Solid",
+    title: "Focus Solid",
+    description: "Focus Solid",
 };
 
 export default async function RootLayout({children}: PropsWithChildren) {
