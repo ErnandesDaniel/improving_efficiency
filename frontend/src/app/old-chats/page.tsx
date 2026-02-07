@@ -1,0 +1,1 @@
+export {default} from '@/modules/old-chats/pages/empty-chat/index';

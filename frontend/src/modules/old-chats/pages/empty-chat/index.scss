@@ -1,0 +1,23 @@
+.empty_chat_page {
+  height:100%;
+  display: flex;
+  padding-left:16px;
+  padding-right:16px;
+
+  .empty_chat_page_content{
+    margin: auto;
+    max-width: 800px;
+    width: 100%;
+
+    .user_name_hello{
+      margin:0;
+      font-size:25px;
+      padding-left:25px;
+    }
+    .user_question{
+      margin:0;
+      font-size:30px;
+      padding-left:25px;
+    }
+  }
+}
