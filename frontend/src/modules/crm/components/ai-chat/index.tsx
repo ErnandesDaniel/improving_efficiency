@@ -84,7 +84,7 @@ export default function AIChat() {
   const [activeTab, setActiveTab] = useState('assistant');
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState<Message[]>(initialMessages);
-  const virtuosoRef = useRef<any>(null);
+  const virtuosoRef = useRef<{ scrollToIndex: (args: { index: number; behavior?: 'smooth' | 'auto' }) => void } | null>(null);
 
   useEffect(() => {
     if (virtuosoRef.current && messages.length > 0) {
@@ -186,11 +186,11 @@ export default function AIChat() {
                 <Flex className="ai-chat__input-area" gap="small">
                   <TextArea
                     value={inputValue}
-                    onChange={(e) => setInputValue(e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInputValue(e.target.value)}
                     placeholder="Помоги составить коммерческое предложение..."
                     className="ai-chat__input"
                     autoSize={{ minRows: 1, maxRows: 4 }}
-                    onPressEnter={(e) => {
+                    onPressEnter={(e: React.KeyboardEvent<HTMLTextAreaElement>) => {
                       if (!e.shiftKey) {
                         e.preventDefault();
                         handleSend();
@@ -230,7 +230,7 @@ export default function AIChat() {
                     <List
                       size="small"
                       dataSource={insight.items}
-                      renderItem={(item) => (
+                      renderItem={(item: string) => (
                         <List.Item className="ai-chat__insight-item">
                           <Text>• {item}</Text>
                         </List.Item>
