@@ -20,7 +20,7 @@ export const { auth, handlers}=NextAuth({
                     } as ServiceLoginRequestDto),
                     headers: {
                         'Content-Type': 'application/json',
-                        'Service-Authorization': `${process.env.SERVICE_AUTHORIZATION_SECRET}`
+                        'Service-Authorization': "my-test-secret-key"
                     },
                 });
 

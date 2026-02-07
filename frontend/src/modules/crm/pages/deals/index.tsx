@@ -156,38 +156,24 @@ export default function DealsPage() {
           </Button>
         </Flex>
 
-        <Flex className="deals-page__filters" wrap gap="small">
+        <Flex className="deals-page__filters" wrap gap="small" align="center">
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
             className="deals-page__search-input"
           />
-          <Select
-            defaultValue="open"
-            suffixIcon={<FilterOutlined />}
-            className="deals-page__filter-select"
-            options={statusFilterOptions}
-          />
-          <Select
-            placeholder="Продукт"
-            className="deals-page__filter-select deals-page__filter-select--small"
-            options={productFilterOptions}
-          />
-          <Select
-            placeholder="Прогноз"
-            className="deals-page__filter-select deals-page__filter-select--small"
-            options={forecastFilterOptions}
-          />
-          <Select
-            placeholder="Обновлена"
-            className="deals-page__filter-select deals-page__filter-select--small"
-            options={updatedFilterOptions}
-          />
-          <Select
-            placeholder="Этап воронки"
-            className="deals-page__filter-select deals-page__filter-select--medium"
-            options={stageFilterOptions}
-          />
+          <Button 
+            type="primary" 
+            className="deals-page__filter-btn deals-page__filter-btn--active"
+            icon={<CloseOutlined style={{ fontSize: 10 }} />}
+            iconPosition="end"
+          >
+            Только открытые
+          </Button>
+          <Button className="deals-page__filter-btn">Продукт</Button>
+          <Button className="deals-page__filter-btn">Прогноз</Button>
+          <Button className="deals-page__filter-btn">Обновлена</Button>
+          <Button className="deals-page__filter-btn">Этап воронки</Button>
           <Button icon={<ArrowUpOutlined />} />
         </Flex>
 
