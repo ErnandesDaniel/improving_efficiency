@@ -8,8 +8,6 @@ import {
   Tag,
   Button,
   Flex,
-  Row,
-  Col,
   Input,
   Select,
 } from 'antd';
@@ -145,16 +143,16 @@ export default function LeadsPage() {
           <Button icon={<SortAscendingOutlined />} />
         </Flex>
 
-        <Row gutter={[16, 16]} className="leads-page__stats">
+        <Flex wrap gap={16} className="leads-page__stats">
           {statsData.map((stat, index) => (
-            <Col xs={12} sm={8} md={6} key={index}>
+            <Flex key={index} vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 180 }}>
               <Card>
                 <Text type="secondary" className="leads-page__stat-label">{stat.label}</Text>
                 <Title level={4} className="leads-page__stat-value">{stat.value}</Title>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
 
         <Card className="leads-page__table-card">
           <Table

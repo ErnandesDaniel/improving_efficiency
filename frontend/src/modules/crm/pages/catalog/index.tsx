@@ -9,8 +9,6 @@ import {
   Select,
   Button,
   Flex,
-  Row,
-  Col,
   List,
 } from 'antd';
 import {
@@ -143,9 +141,9 @@ export default function CatalogPage() {
           <Button icon={<SortAscendingOutlined />} />
         </Flex>
 
-        <Row gutter={[24, 24]} className="catalog-page__grid">
+        <Flex wrap gap={24} className="catalog-page__grid">
           {productsData.map((product) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={product.id}>
+            <Flex key={product.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 280 }}>
               <Card hoverable className="catalog-page__card">
                 <Flex className="catalog-page__card-header" justify="space-between" align="center">
                   <Tag className="catalog-page__type-tag">{product.type}</Tag>
@@ -174,9 +172,9 @@ export default function CatalogPage() {
                   <Text strong className="catalog-page__premium-value">{product.minPremium.toLocaleString()}</Text>
                 </div>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
       </div>
     </CrmLayout>
   );

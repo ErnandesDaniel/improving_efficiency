@@ -8,8 +8,6 @@ import {
   Tag,
   Button,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import {
   SortAscendingOutlined,
@@ -141,20 +139,20 @@ export default function PaymentsPage() {
           <Title level={3} className="payments-page__title">Начисления</Title>
         </Flex>
 
-        <Row gutter={[16, 16]} className="payments-page__stats">
-          <Col xs={24} sm={12} md={8}>
+        <Flex wrap gap={16} className="payments-page__stats">
+          <Flex vertical style={{ flex: '1 1 calc(33.33% - 11px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">Премии</Text>
               <Title level={4} className="payments-page__stat-value">205 000 ₽</Title>
             </Card>
-          </Col>
-          <Col xs={24} sm={12} md={8}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(33.33% - 11px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">Комиссии</Text>
               <Title level={4} className="payments-page__stat-value">47 000 ₽</Title>
             </Card>
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
 
         <Flex className="payments-page__toolbar" justify="flex-end">
           <Button icon={<SortAscendingOutlined />} />

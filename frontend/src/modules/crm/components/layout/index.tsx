@@ -21,6 +21,7 @@ import {
 } from '@ant-design/icons';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import AIChat from '../ai-chat';
 import './index.scss';
 
 const { Sider, Content } = Layout;
@@ -33,24 +34,42 @@ const mainMenuItems = [
 ];
 
 const clientsMenuItems = [
-  { type: 'divider' as const, key: 'divider1' },
-  { key: '/crm/leads', icon: <UserOutlined />, label: <Link href="/crm/leads">Новые лиды</Link> },
-  { key: '/crm/support', icon: <TeamOutlined />, label: <Link href="/crm/support">На сопровождении</Link> },
-  { key: '/crm/rejections', icon: <UserDeleteOutlined />, label: <Link href="/crm/rejections">Отказы</Link> },
+  { 
+    key: 'clients-group', 
+    type: 'group' as const, 
+    label: 'КЛИЕНТЫ',
+    children: [
+      { key: '/crm/leads', icon: <UserOutlined />, label: <Link href="/crm/leads">Новые лиды</Link> },
+      { key: '/crm/support', icon: <TeamOutlined />, label: <Link href="/crm/support">На сопровождении</Link> },
+      { key: '/crm/rejections', icon: <UserDeleteOutlined />, label: <Link href="/crm/rejections">Отказы</Link> },
+    ]
+  },
 ];
 
 const planningMenuItems = [
-  { type: 'divider' as const, key: 'divider2' },
-  { key: '/crm/analytics', icon: <BarChartOutlined />, label: <Link href="/crm/analytics">Аналитика</Link> },
-  { key: '/crm/goals', icon: <AimOutlined />, label: <Link href="/crm/goals">Мои цели</Link> },
+  { 
+    key: 'planning-group', 
+    type: 'group' as const, 
+    label: 'ПЛАНИРОВАНИЕ',
+    children: [
+      { key: '/crm/analytics', icon: <BarChartOutlined />, label: <Link href="/crm/analytics">Аналитика</Link> },
+      { key: '/crm/goals', icon: <AimOutlined />, label: <Link href="/crm/goals">Мои цели</Link> },
+    ]
+  },
 ];
 
 const otherMenuItems = [
-  { type: 'divider' as const, key: 'divider3' },
-  { key: '/crm/training', icon: <BookOutlined />, label: <Link href="/crm/training">Обучение</Link> },
-  { key: '/crm/news', icon: <ReadOutlined />, label: <Link href="/crm/news">Новости</Link> },
-  { key: '/crm/payments', icon: <CalculatorOutlined />, label: <Link href="/crm/payments">Начисления</Link> },
-  { key: '/crm/catalog', icon: <AppstoreOutlined />, label: <Link href="/crm/catalog">Каталог продуктов</Link> },
+  { 
+    key: 'other-group', 
+    type: 'group' as const, 
+    label: 'ДРУГОЕ',
+    children: [
+      { key: '/crm/training', icon: <BookOutlined />, label: <Link href="/crm/training">Обучение</Link> },
+      { key: '/crm/news', icon: <ReadOutlined />, label: <Link href="/crm/news">Новости</Link> },
+      { key: '/crm/payments', icon: <CalculatorOutlined />, label: <Link href="/crm/payments">Начисления</Link> },
+      { key: '/crm/catalog', icon: <AppstoreOutlined />, label: <Link href="/crm/catalog">Каталог продуктов</Link> },
+    ]
+  },
 ];
 
 const menuItems = [
@@ -107,6 +126,8 @@ export default function CrmLayout({ children }: CrmLayoutProps) {
           {children}
         </Content>
       </Layout>
+
+      <AIChat />
     </Layout>
   );
 }

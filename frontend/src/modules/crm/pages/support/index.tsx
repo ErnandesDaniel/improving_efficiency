@@ -8,8 +8,6 @@ import {
   Tag,
   Button,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import {
   PlusOutlined,
@@ -119,16 +117,16 @@ export default function SupportPage() {
           </Flex>
         </Flex>
 
-        <Row gutter={[16, 16]} className="support-page__stats">
+        <Flex wrap gap={16} className="support-page__stats">
           {statsData.map((stat, index) => (
-            <Col xs={12} sm={8} md={6} lg={4} key={index}>
+            <Flex key={index} vertical style={{ flex: '1 1 calc(16.66% - 14px)', minWidth: 150 }}>
               <Card>
                 <Text type="secondary" className="support-page__stat-label">{stat.label}</Text>
                 <Title level={4} className="support-page__stat-value">{stat.value}</Title>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
 
         <Card className="support-page__table-card">
           <Table

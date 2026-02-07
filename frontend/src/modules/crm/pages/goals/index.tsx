@@ -5,8 +5,6 @@ import {
   Typography,
   Card,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import CrmLayout from '../../components/layout';
 import './index.scss';
@@ -62,14 +60,14 @@ export default function GoalsPage() {
           </Text>
         </div>
 
-        <Row gutter={[24, 24]} className="goals-page__grid">
-          <Col xs={24} md={12}>
+        <Flex wrap gap={24} className="goals-page__grid">
+          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
             <GoalCard title="Квартал" stats={quarterGoals} />
-          </Col>
-          <Col xs={24} md={12}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
             <GoalCard title="Год" stats={yearGoals} />
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
       </div>
     </CrmLayout>
   );

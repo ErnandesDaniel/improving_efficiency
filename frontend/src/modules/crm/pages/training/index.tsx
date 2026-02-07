@@ -9,8 +9,6 @@ import {
   Progress,
   Button,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import CrmLayout from '../../components/layout';
 import './index.scss';
@@ -144,23 +142,23 @@ export default function TrainingPage() {
         />
 
         {activeTab === 'courses' && (
-          <Row gutter={[24, 24]} className="training-page__grid">
+          <Flex wrap gap={24} className="training-page__grid">
             {coursesData.map((course) => (
-              <Col xs={24} sm={12} md={8} lg={6} key={course.id}>
+              <Flex key={course.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 260 }}>
                 <CourseCard course={course} />
-              </Col>
+              </Flex>
             ))}
-          </Row>
+          </Flex>
         )}
 
         {activeTab === 'webinars' && (
-          <Row gutter={[24, 24]} className="training-page__grid">
+          <Flex wrap gap={24} className="training-page__grid">
             {webinarsData.map((course) => (
-              <Col xs={24} sm={12} md={8} lg={6} key={course.id}>
+              <Flex key={course.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 260 }}>
                 <CourseCard course={course} />
-              </Col>
+              </Flex>
             ))}
-          </Row>
+          </Flex>
         )}
 
         {activeTab === 'faq' && (

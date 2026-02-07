@@ -9,8 +9,6 @@ import {
   Select,
   Button,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import {
   SearchOutlined,
@@ -78,9 +76,9 @@ export default function EmployeesPage() {
           <Button icon={<SortAscendingOutlined />} />
         </Flex>
 
-        <Row gutter={[24, 24]} className="employees-page__grid">
+        <Flex wrap gap={24} className="employees-page__grid">
           {employeesData.map((employee) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={employee.id}>
+            <Flex key={employee.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 240 }}>
               <Card hoverable className="employees-page__card">
                 <Flex vertical align="center" gap="middle">
                   <Avatar
@@ -94,9 +92,9 @@ export default function EmployeesPage() {
                   <Text type="secondary" className="employees-page__role">{employee.role}</Text>
                 </Flex>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
       </div>
     </CrmLayout>
   );

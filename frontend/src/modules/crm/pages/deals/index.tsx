@@ -8,8 +8,6 @@ import {
   Table,
   Tag,
   Flex,
-  Row,
-  Col,
   Input,
   Select,
   Badge,
@@ -224,14 +222,14 @@ export default function DealsPage() {
           <Button icon={<ArrowUpOutlined />} />
         </Flex>
 
-        <Row gutter={[16, 16]} className="deals-page__stats">
-          <Col xs={24} sm={12} md={6}>
+        <Flex wrap gap={16} className="deals-page__stats">
+          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">Цель на месяц</Text>
               <Title level={4} className="deals-page__stat-value">—</Title>
             </Card>
-          </Col>
-          <Col xs={24} sm={12} md={6}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">
                 Прогноз до конца месяца
@@ -239,29 +237,29 @@ export default function DealsPage() {
               </Text>
               <Title level={4} className="deals-page__stat-value">5 940 ₽</Title>
             </Card>
-          </Col>
-          <Col xs={24} sm={12} md={6}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">Продано с начала месяца</Text>
               <Title level={4} className="deals-page__stat-value">0 ₽</Title>
             </Card>
-          </Col>
-          <Col xs={24} sm={12} md={6}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">КП отправлено / в работе</Text>
               <Title level={4} className="deals-page__stat-value">0 / 1</Title>
             </Card>
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
 
-        <Row gutter={[16, 16]} className="deals-page__stats">
-          <Col xs={24} sm={12} md={6}>
+        <Flex wrap gap={16} className="deals-page__stats">
+          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
             <Card>
               <Text type="secondary">Средний цикл сделки</Text>
               <Title level={4} className="deals-page__stat-value">—</Title>
             </Card>
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
 
         <Card className="deals-page__table-card">
           <Table

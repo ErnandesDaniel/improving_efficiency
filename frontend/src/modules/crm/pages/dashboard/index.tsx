@@ -4,8 +4,6 @@ import React from 'react';
 import {
   Typography,
   Card,
-  Row,
-  Col,
   Progress,
   Avatar,
   List,
@@ -161,8 +159,8 @@ export default function DashboardPage() {
           ))}
         </Card>
 
-        <Row gutter={[24, 24]} className="dashboard-page__two-column">
-          <Col xs={24} lg={12}>
+        <Flex wrap gap={24} className="dashboard-page__two-column">
+          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
             <Card title="Рекомендуем к изучению" className="dashboard-page__card">
               <List
                 itemLayout="horizontal"
@@ -185,9 +183,9 @@ export default function DashboardPage() {
                 )}
               />
             </Card>
-          </Col>
+          </Flex>
 
-          <Col xs={24} lg={12}>
+          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
             <Card title="Скоро платёж" className="dashboard-page__card">
               <List
                 itemLayout="horizontal"
@@ -206,58 +204,58 @@ export default function DashboardPage() {
                 )}
               />
             </Card>
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
 
-        <Row gutter={[24, 24]} className="dashboard-page__progress-row">
-          <Col xs={24} lg={12}>
+        <Flex wrap gap={24} className="dashboard-page__progress-row">
+          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
             <Card title="План по образованию" className="dashboard-page__card">
               <div className="dashboard-page__progress-wrapper">
                 <Progress percent={84} strokeColor="#52c41a" showInfo={false} />
               </div>
-              <Row>
-                <Col span={12}>
+              <Flex>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">3 из 12</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">Пройдено курсов</Text>
-                </Col>
-                <Col span={12}>
+                </Flex>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">84%</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">Средний балл</Text>
-                </Col>
-              </Row>
+                </Flex>
+              </Flex>
             </Card>
-          </Col>
+          </Flex>
 
-          <Col xs={24} lg={12}>
+          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
             <Card title="Мои начисления" className="dashboard-page__card">
-              <Row gutter={16}>
-                <Col span={8}>
+              <Flex gap={16}>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">47 тыс. ₽</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">Текущий заработок</Text>
-                </Col>
-                <Col span={8}>
+                </Flex>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">14 тыс. ₽</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">К выплате</Text>
-                </Col>
-                <Col span={8}>
+                </Flex>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">33 тыс. ₽</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">Выплачено</Text>
-                </Col>
-              </Row>
+                </Flex>
+              </Flex>
               <Divider className="dashboard-page__earnings-divider" />
-              <Row gutter={16}>
-                <Col span={8}>
+              <Flex gap={16}>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">4%</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">КВ</Text>
-                </Col>
-                <Col span={8}>
+                </Flex>
+                <Flex vertical style={{ flex: 1 }}>
                   <Title level={4} className="dashboard-page__stat-number">89%</Title>
                   <Text type="secondary" className="dashboard-page__stat-label">Рейтинг</Text>
-                </Col>
-              </Row>
+                </Flex>
+              </Flex>
             </Card>
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
 
         <Card
           title="Новости"

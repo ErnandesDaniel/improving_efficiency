@@ -8,8 +8,6 @@ import {
   Tag,
   Button,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import {
   PlusOutlined,
@@ -117,16 +115,16 @@ export default function RejectionsPage() {
           </Flex>
         </Flex>
 
-        <Row gutter={[16, 16]} className="rejections-page__stats">
+        <Flex wrap gap={16} className="rejections-page__stats">
           {statsData.map((stat, index) => (
-            <Col xs={12} sm={6} key={index}>
+            <Flex key={index} vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 180 }}>
               <Card>
                 <Text type="secondary" className="rejections-page__stat-label">{stat.label}</Text>
                 <Title level={4} className="rejections-page__stat-value">{stat.value}</Title>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
 
         <Card className="rejections-page__table-card">
           <Table

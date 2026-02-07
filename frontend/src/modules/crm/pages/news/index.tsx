@@ -8,8 +8,6 @@ import {
   Tag,
   Button,
   Flex,
-  Row,
-  Col,
 } from 'antd';
 import {
   RightOutlined,
@@ -115,9 +113,9 @@ export default function NewsPage() {
           ]}
         />
 
-        <Row gutter={[24, 24]} className="news-page__grid">
+        <Flex wrap gap={24} className="news-page__grid">
           {newsItems.map((news) => (
-            <Col xs={24} sm={12} md={8} lg={6} key={news.id}>
+            <Flex key={news.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 260 }}>
               <Card hoverable className="news-page__card">
                 <Flex className="news-page__card-header" gap="small">
                   <Tag color="blue" className="news-page__category">{news.category}</Tag>
@@ -125,9 +123,9 @@ export default function NewsPage() {
                 </Flex>
                 <Text strong className="news-page__card-title">{news.title}</Text>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
 
         <Flex className="news-page__footer" justify="center">
           <Button type="text" icon={<RightOutlined />}>

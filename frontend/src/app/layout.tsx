@@ -9,13 +9,11 @@ import RestProvider from "@/components/providers/rest-provider";
 import MockProvider from "@/components/providers/mock-provider";
 
 import {AntdRegistry} from "@ant-design/nextjs-registry";
-import MqttProvider from "@/components/providers/mqtt-provider";
-import MqttRestSyncProvider from "@/components/providers/mqtt-rest-sync-provider";
 import NotificationProvider from "@/components/providers/notification-provider";
 
 export const metadata: Metadata = {
-    title: "Фокус внимания",
-    description: "Фокус внимания",
+    title: "Фокус Solid",
+    description: "Фокус Solid",
 };
 
 export default async function RootLayout({children}: PropsWithChildren) {

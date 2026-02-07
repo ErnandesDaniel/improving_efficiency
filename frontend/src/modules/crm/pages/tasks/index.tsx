@@ -9,8 +9,6 @@ import {
   Flex,
   Select,
   Input,
-  Row,
-  Col,
   Tag,
 } from 'antd';
 import {
@@ -223,9 +221,9 @@ export default function TasksPage() {
 
         {viewMode === 'table' && (
           <Card className="tasks-page__table-card">
-            <Row gutter={[16, 16]}>
+            <Flex wrap gap={16}>
               {tasksData.map(task => (
-                <Col xs={24} sm={12} md={8} key={task.id}>
+                <Flex key={task.id} vertical style={{ flex: '1 1 calc(33.33% - 11px)', minWidth: 280 }}>
                   <Card size="small" hoverable className="tasks-page__task-card">
                     <Tag color={task.color}>{task.type}</Tag>
                     <Title level={5} className="tasks-page__task-title">{task.title}</Title>
@@ -233,9 +231,9 @@ export default function TasksPage() {
                       {dayjs(task.date).format('D MMMM')}, {task.time}
                     </Text>
                   </Card>
-                </Col>
+                </Flex>
               ))}
-            </Row>
+            </Flex>
           </Card>
         )}
       </div>

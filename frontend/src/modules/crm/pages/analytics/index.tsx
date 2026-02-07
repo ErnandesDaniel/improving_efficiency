@@ -6,8 +6,6 @@ import {
   Card,
   Tag,
   Flex,
-  Row,
-  Col,
   Progress,
 } from 'antd';
 import CrmLayout from '../../components/layout';
@@ -44,33 +42,33 @@ export default function AnalyticsPage() {
           <Tag closable>Все продукты</Tag>
         </Flex>
 
-        <Row gutter={[16, 16]} className="analytics-page__stats">
+        <Flex wrap gap={16} className="analytics-page__stats">
           {mainStats.map((stat, index) => (
-            <Col xs={12} sm={8} md={6} lg={4} key={index}>
+            <Flex key={index} vertical style={{ flex: '1 1 calc(16.66% - 14px)', minWidth: 160 }}>
               <Card className="analytics-page__stat-card">
                 <Title level={4} className="analytics-page__stat-value">{stat.value}</Title>
                 <Text type="secondary" className="analytics-page__stat-label">{stat.label}</Text>
               </Card>
-            </Col>
+            </Flex>
           ))}
-        </Row>
+        </Flex>
 
-        <Row gutter={[24, 24]} className="analytics-page__charts">
-          <Col xs={24} md={8}>
+        <Flex wrap gap={24} className="analytics-page__charts">
+          <Flex vertical style={{ flex: '1 1 calc(33.33% - 16px)', minWidth: 280 }}>
             <Card title="Скоро закроются" className="analytics-page__chart-card">
               <Flex vertical align="center" justify="center" className="analytics-page__progress-circle">
                 <Progress type="circle" percent={75} format={() => '2'} strokeColor="#52c41a" />
               </Flex>
             </Card>
-          </Col>
-          <Col xs={24} md={8}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(33.33% - 16px)', minWidth: 280 }}>
             <Card title="Угроза срыва" className="analytics-page__chart-card">
               <Flex vertical align="center" justify="center" className="analytics-page__progress-circle">
                 <Progress type="circle" percent={0} format={() => '0'} strokeColor="#ff4d4f" />
               </Flex>
             </Card>
-          </Col>
-          <Col xs={24} md={8}>
+          </Flex>
+          <Flex vertical style={{ flex: '1 1 calc(33.33% - 16px)', minWidth: 280 }}>
             <Card title="Воронка по сделке" className="analytics-page__chart-card">
               <div className="analytics-page__funnel">
                 {funnelData.map((item, index) => (
@@ -81,8 +79,8 @@ export default function AnalyticsPage() {
                 ))}
               </div>
             </Card>
-          </Col>
-        </Row>
+          </Flex>
+        </Flex>
       </div>
     </CrmLayout>
   );
