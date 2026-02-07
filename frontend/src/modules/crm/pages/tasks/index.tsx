@@ -176,27 +176,15 @@ export default function TasksPage() {
           </Flex>
         </Flex>
 
-        <Flex className="tasks-page__filters" wrap gap="small">
+        <Flex className="tasks-page__filters" wrap gap="small" align="center">
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
             className="tasks-page__search-input"
           />
-          <Select
-            placeholder="Только открытые"
-            className="tasks-page__filter-select"
-            options={statusOptions}
-          />
-          <Select
-            placeholder="Крайний срок"
-            className="tasks-page__filter-select"
-            options={deadlineOptions}
-          />
-          <Select
-            placeholder="Тип задачи"
-            className="tasks-page__filter-select"
-            options={typeOptions}
-          />
+          <Button className="tasks-page__filter-btn">Только открытые</Button>
+          <Button className="tasks-page__filter-btn">Крайний срок</Button>
+          <Button className="tasks-page__filter-btn">Тип задачи</Button>
           <Button icon={<SortAscendingOutlined />} />
         </Flex>
 
