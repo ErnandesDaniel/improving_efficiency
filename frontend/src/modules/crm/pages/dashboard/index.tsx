@@ -126,16 +126,19 @@ export default function DashboardPage() {
 
         <Card className="dashboard-page__plan-card">
           <Text strong>План от куратора на месяц</Text>
-          <Flex className="dashboard-page__plan-stats" split={<Divider type="vertical" className="dashboard-page__divider" />}>
+          <Flex className="dashboard-page__plan-stats" gap="large" align="center">
             <div>
               <Text type="secondary" className="dashboard-page__plan-label">0 из 0 новых лиц</Text>
             </div>
+            <Divider type="vertical" className="dashboard-page__divider" />
             <div>
               <Text type="secondary" className="dashboard-page__plan-label">0 из 0 отправлено КП</Text>
             </div>
+            <Divider type="vertical" className="dashboard-page__divider" />
             <div>
               <Text type="secondary" className="dashboard-page__plan-label">0 из 0 заключено сделок</Text>
             </div>
+            <Divider type="vertical" className="dashboard-page__divider" />
             <div>
               <Text type="secondary" className="dashboard-page__plan-label">Факт / план по премии: 0 ₽ / 0 ₽</Text>
             </div>
