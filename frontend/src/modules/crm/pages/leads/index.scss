@@ -1,0 +1,49 @@
+.leads-page {
+  max-width: 1400px;
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__filters {
+    margin-bottom: 24px;
+  }
+
+  &__search-input {
+    width: 200px;
+  }
+
+  &__filter-select {
+    width: 150px;
+  }
+
+  &__stats {
+    margin-bottom: 24px;
+  }
+
+  &__stat-label {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+
+  &__stat-value {
+    margin: 0;
+  }
+
+  &__table-card {
+    margin-top: 24px;
+  }
+
+  &__phone {
+    font-size: 12px;
+  }
+
+  &__status-tag {
+    font-size: 12px;
+  }
+}

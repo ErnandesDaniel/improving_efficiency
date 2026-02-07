@@ -33,20 +33,20 @@ const mainMenuItems = [
 ];
 
 const clientsMenuItems = [
-  { type: 'divider', key: 'divider1', label: 'КЛИЕНТЫ', className: 'menu-divider' },
+  { type: 'divider' as const, key: 'divider1' },
   { key: '/crm/leads', icon: <UserOutlined />, label: <Link href="/crm/leads">Новые лиды</Link> },
   { key: '/crm/support', icon: <TeamOutlined />, label: <Link href="/crm/support">На сопровождении</Link> },
   { key: '/crm/rejections', icon: <UserDeleteOutlined />, label: <Link href="/crm/rejections">Отказы</Link> },
 ];
 
 const planningMenuItems = [
-  { type: 'divider', key: 'divider2', label: 'ПЛАНИРОВАНИЕ', className: 'menu-divider' },
+  { type: 'divider' as const, key: 'divider2' },
   { key: '/crm/analytics', icon: <BarChartOutlined />, label: <Link href="/crm/analytics">Аналитика</Link> },
   { key: '/crm/goals', icon: <AimOutlined />, label: <Link href="/crm/goals">Мои цели</Link> },
 ];
 
 const otherMenuItems = [
-  { type: 'divider', key: 'divider3', label: 'ДРУГОЕ', className: 'menu-divider' },
+  { type: 'divider' as const, key: 'divider3' },
   { key: '/crm/training', icon: <BookOutlined />, label: <Link href="/crm/training">Обучение</Link> },
   { key: '/crm/news', icon: <ReadOutlined />, label: <Link href="/crm/news">Новости</Link> },
   { key: '/crm/payments', icon: <CalculatorOutlined />, label: <Link href="/crm/payments">Начисления</Link> },
