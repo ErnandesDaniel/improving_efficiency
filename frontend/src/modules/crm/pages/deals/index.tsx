@@ -9,49 +9,18 @@ import {
   Tag,
   Flex,
   Input,
-  Select,
   Badge,
 } from 'antd';
 import {
   PlusOutlined,
   SearchOutlined,
-  FilterOutlined,
   ArrowUpOutlined,
+  CloseOutlined,
 } from '@ant-design/icons';
 import CrmLayout from '../../components/layout';
 import './index.scss';
 
 const { Title, Text } = Typography;
-
-const statusFilterOptions = [
-  { value: 'open', label: 'Только открытые' },
-  { value: 'all', label: 'Все сделки' },
-  { value: 'closed', label: 'Закрытые' },
-];
-
-const productFilterOptions = [
-  { value: 'premium', label: 'Премиум' },
-  { value: 'sunny', label: 'Солнышко' },
-  { value: 'gloria', label: 'Глория' },
-];
-
-const forecastFilterOptions = [
-  { value: 'high', label: 'Высокий' },
-  { value: 'medium', label: 'Средний' },
-  { value: 'low', label: 'Низкий' },
-];
-
-const updatedFilterOptions = [
-  { value: 'today', label: 'Сегодня' },
-  { value: 'week', label: 'Неделя' },
-  { value: 'month', label: 'Месяц' },
-];
-
-const stageFilterOptions = [
-  { value: 'kp', label: 'КП' },
-  { value: 'payment', label: 'Оплата' },
-  { value: 'signing', label: 'Подписание' },
-];
 
 interface Deal {
   key: string;

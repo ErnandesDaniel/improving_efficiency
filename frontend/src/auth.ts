@@ -58,8 +58,8 @@ export const { auth, handlers}=NextAuth({
     },
     providers:[
        GoogleProvider({
-           clientId: process.env.GOOGLE_CLIENT_ID,
-           clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+           clientId: "test",
+           clientSecret: "test",
            authorization: {
                params: {
                    prompt: "select_account", //заставляет Google каждый раз показывать окно согласия, что полезно на этапе разработки.
