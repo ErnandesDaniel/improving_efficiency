@@ -1,138 +1,97 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Typography,
   Card,
+  Typography,
+  Row,
+  Col,
   Tabs,
   Tag,
-  Button,
-  Flex,
 } from 'antd';
-import {
-  RightOutlined,
-} from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
+const { TabPane } = Tabs;
 
-const companyNews = [
+interface NewsItem {
+  id: number;
+  category: string;
+  date: string;
+  title: string;
+}
+
+const newsData: NewsItem[] = [
   {
-    id: '1',
+    id: 1,
     category: 'Компания',
     date: '15 декабря 2024',
     title: 'Новый рекорд продаж в ноябре 2024',
   },
   {
-    id: '2',
+    id: 2,
     category: 'Компания',
     date: '12 декабря 2024',
-    title: 'Итоги года: лучшие агенты получат призы',
+    title: 'Итоги года: лучшие специалисты получат призы',
   },
   {
-    id: '3',
+    id: 3,
     category: 'Компания',
     date: '5 декабря 2024',
     title: 'Партнёрство с ведущими банками расширено',
   },
   {
-    id: '4',
+    id: 4,
     category: 'Компания',
     date: '1 декабря 2024',
-    title: 'Обновление мобильного приложения агента',
+    title: 'Обновление мобильного приложения',
   },
 ];
 
-const productUpdates = [
-  {
-    id: '1',
-    category: 'Обновление',
-    date: '10 декабря 2024',
-    title: 'Новые условия по программе "Семейный капитал"',
-  },
-  {
-    id: '2',
-    category: 'Обновление',
-    date: '8 декабря 2024',
-    title: 'Изменения в тарифах на 2025 год',
-  },
-];
-
-const promotions = [
-  {
-    id: '1',
-    category: 'Акция',
-    date: '1 декабря 2024',
-    title: 'Новогодняя акция: двойные бонусы',
-  },
-  {
-    id: '2',
-    category: 'Акция',
-    date: '15 ноября 2024',
-    title: 'Специальные условия для новых агентов',
-  },
-];
+const NewsCard = ({ item }: { item: NewsItem }) => (
+  <Card style={{ height: '100%' }}>
+    <Tag color="blue" style={{ marginBottom: 12 }}>
+      {item.category}
+    </Tag>
+    <Text type="secondary" style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>
+      {item.date}
+    </Text>
+    <Title level={5} style={{ margin: 0 }}>
+      {item.title}
+    </Title>
+  </Card>
+);
 
 export default function NewsPage() {
-  const [activeTab, setActiveTab] = useState('company');
-
-  const getNewsForTab = () => {
-    switch (activeTab) {
-      case 'company':
-        return companyNews;
-      case 'products':
-        return productUpdates;
-      case 'promotions':
-        return promotions;
-      default:
-        return companyNews;
-    }
-  };
-
-  const newsItems = getNewsForTab();
-
   return (
-    <CrmLayout>
-      <div className="news-page">
-        <div className="news-page__header">
-          <Title level={3} className="news-page__title">Новости</Title>
-          <Text type="secondary" className="news-page__subtitle">
-            Новости компании и бонусные программы
-          </Text>
-        </div>
+    <div className="news-page">
+      <Title level={2} style={{ marginBottom: 8 }}>
+        Новости
+      </Title>
+      <Text type="secondary" style={{ display: 'block', marginBottom: 24 }}>
+        Новости компании и бонусные программы
+      </Text>
 
-        <Tabs
-          activeKey={activeTab}
-          onChange={setActiveTab}
-          className="news-page__tabs"
-          items={[
-            { key: 'company', label: 'Компания' },
-            { key: 'products', label: 'Обновления продуктов' },
-            { key: 'promotions', label: 'Акции и бонусы' },
-          ]}
-        />
-
-        <Flex wrap gap={24} className="news-page__grid">
-          {newsItems.map((news) => (
-            <Flex key={news.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 260 }}>
-              <Card hoverable className="news-page__card">
-                <Flex className="news-page__card-header" gap="small">
-                  <Tag color="blue" className="news-page__category">{news.category}</Tag>
-                  <Text type="secondary" className="news-page__date">{news.date}</Text>
-                </Flex>
-                <Text strong className="news-page__card-title">{news.title}</Text>
-              </Card>
-            </Flex>
-          ))}
-        </Flex>
-
-        <Flex className="news-page__footer" justify="center">
-          <Button type="text" icon={<RightOutlined />}>
-            Все новости
-          </Button>
-        </Flex>
-      </div>
-    </CrmLayout>
+      <Tabs defaultActiveKey="company">
+        <TabPane tab="Компания" key="company">
+          <Row gutter={[24, 24]}>
+            {newsData.map((item) => (
+              <Col key={item.id} span={6}>
+                <NewsCard item={item} />
+              </Col>
+            ))}
+          </Row>
+        </TabPane>
+        <TabPane tab="Обновления продуктов" key="products">
+          <Card>
+            <Text>Обновления продуктов (в разработке)</Text>
+          </Card>
+        </TabPane>
+        <TabPane tab="Акции и бонусы" key="bonuses">
+          <Card>
+            <Text>Акции и бонусы (в разработке)</Text>
+          </Card>
+        </TabPane>
+      </Tabs>
+    </div>
   );
 }

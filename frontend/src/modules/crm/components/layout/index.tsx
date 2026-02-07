@@ -15,6 +15,7 @@ import {
   ReadOutlined,
   CalculatorOutlined,
   AppstoreOutlined,
+  ContactsOutlined,
   QuestionCircleOutlined,
   BellOutlined,
   MenuOutlined,
@@ -68,6 +69,7 @@ const otherMenuItems = [
       { key: '/crm/news', icon: <ReadOutlined />, label: <Link href="/crm/news">Новости</Link> },
       { key: '/crm/payments', icon: <CalculatorOutlined />, label: <Link href="/crm/payments">Начисления</Link> },
       { key: '/crm/catalog', icon: <AppstoreOutlined />, label: <Link href="/crm/catalog">Каталог продуктов</Link> },
+      { key: '/crm/employees', icon: <ContactsOutlined />, label: <Link href="/crm/employees">Сотрудники</Link> },
     ]
   },
 ];

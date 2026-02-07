@@ -2,37 +2,44 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
+  Button,
+  Input,
   Table,
   Tag,
-  Button,
-  Flex,
+  Typography,
+  Space,
+  Row,
+  Col,
+  Tooltip,
 } from 'antd';
 import {
   PlusOutlined,
-  ImportOutlined,
+  SearchOutlined,
+  UploadOutlined,
   CalendarOutlined,
   DeleteOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const statsData = [
-  { label: 'Клиентов на сопровождении', value: '8' },
-  { label: 'Сумма портфеля', value: '0 ₽' },
-  { label: 'Продлений скоро', value: '1' },
-  { label: 'Просрочено продление', value: '3' },
-  { label: 'Потенциал допродаж', value: '0 ₽' },
-  { label: 'Без контакта 30+ дней', value: '8' },
-];
+interface SupportClient {
+  id: number;
+  name: string;
+  phone: string;
+  contract: string;
+  premium: string;
+  renewal: string;
+  dr: string;
+  updated: string;
+  nextAction: string;
+  status: string;
+}
 
-const supportData = [
+const supportData: SupportClient[] = [
   {
-    key: '1',
-    client: 'Васильев ...',
+    id: 1,
+    name: 'Васильев ...',
     phone: '+7 (116) 101-...',
     contract: '—',
     premium: '—',
@@ -43,8 +50,8 @@ const supportData = [
     status: 'Активный клиент',
   },
   {
-    key: '2',
-    client: 'Смирнова ...',
+    id: 2,
+    name: 'Смирнова ...',
     phone: '+7 (999) 123-...',
     contract: '—',
     premium: '—',
@@ -55,8 +62,8 @@ const supportData = [
     status: 'Активный клиент',
   },
   {
-    key: '3',
-    client: 'Константи...',
+    id: 3,
+    name: 'Константи...',
     phone: '+7 (123) 456-...',
     contract: '—',
     premium: '—',
@@ -66,76 +73,166 @@ const supportData = [
     nextAction: '08.12.2025',
     status: 'Активный клиент',
   },
+  {
+    id: 4,
+    name: 'Фёдоров И...',
+    phone: '+7 (855) 992-...',
+    contract: '—',
+    premium: '—',
+    renewal: '20.02.2026',
+    dr: '12.05.1994',
+    updated: '11.12.2025',
+    nextAction: '17.12.2025',
+    status: 'Активный клиент',
+  },
+  {
+    id: 5,
+    name: 'Соловьёв ...',
+    phone: '+7 (961) 314-...',
+    contract: '—',
+    premium: '—',
+    renewal: '16.03.2026',
+    dr: '09.02.1981',
+    updated: '30.11.2025',
+    nextAction: '17.12.2025',
+    status: 'Активный клиент',
+  },
+];
+
+const statsCards = [
+  { title: 'Клиентов на сопровождении', value: '8' },
+  { title: 'Сумма портфеля', value: '0 ₽' },
+  { title: 'Продлений скоро', value: '1' },
+  { title: 'Просрочено продление', value: '3' },
+  { title: 'Потенциал допродаж', value: '0 ₽' },
+  { title: 'Без контакта 30+ дней', value: '8' },
 ];
 
 const columns = [
   {
     title: 'Клиент',
-    dataIndex: 'client',
-    key: 'client',
-    render: (text: string, record: typeof supportData[0]) => (
+    dataIndex: 'name',
+    key: 'name',
+    render: (name: string, record: SupportClient) => (
       <div>
-        <Text strong>{text}</Text>
+        <Text strong>{name}</Text>
         <br />
-        <Text type="secondary" className="support-page__phone">{record.phone}</Text>
+        <Text type="secondary" style={{ fontSize: 12 }}>
+          {record.phone}
+        </Text>
       </div>
     ),
   },
-  { title: 'Договор', dataIndex: 'contract', key: 'contract' },
-  { title: 'Премия', dataIndex: 'premium', key: 'premium' },
-  { title: 'Продление', dataIndex: 'renewal', key: 'renewal' },
-  { title: 'ДР', dataIndex: 'dr', key: 'dr' },
-  { title: 'Обновлено', dataIndex: 'updated', key: 'updated' },
-  { title: 'След. действие', dataIndex: 'nextAction', key: 'nextAction' },
+  {
+    title: 'Договор',
+    dataIndex: 'contract',
+    key: 'contract',
+  },
+  {
+    title: 'Премия',
+    dataIndex: 'premium',
+    key: 'premium',
+  },
+  {
+    title: 'Продление',
+    dataIndex: 'renewal',
+    key: 'renewal',
+  },
+  {
+    title: 'ДР',
+    dataIndex: 'dr',
+    key: 'dr',
+  },
+  {
+    title: 'Обновлено',
+    dataIndex: 'updated',
+    key: 'updated',
+  },
+  {
+    title: 'След. действие',
+    dataIndex: 'nextAction',
+    key: 'nextAction',
+  },
   {
     title: 'Статус',
     dataIndex: 'status',
     key: 'status',
-    render: (status: string) => <Tag color="success" className="support-page__status-tag">{status}</Tag>,
+    render: (status: string) => (
+      <Tag color="success">{status}</Tag>
+    ),
   },
   {
     title: 'Действия',
     key: 'actions',
     render: () => (
-      <Flex gap="small">
-        <Button icon={<CalendarOutlined />} size="small" />
-        <Button icon={<DeleteOutlined />} size="small" danger />
-      </Flex>
+      <Space>
+        <Tooltip title="Добавить задачу">
+          <Button type="text" icon={<CalendarOutlined />} size="small" />
+        </Tooltip>
+        <Tooltip title="Удалить">
+          <Button type="text" icon={<DeleteOutlined />} size="small" danger />
+        </Tooltip>
+      </Space>
     ),
   },
 ];
 
 export default function SupportPage() {
   return (
-    <CrmLayout>
-      <div className="support-page">
-        <Flex className="support-page__header" justify="space-between" align="center">
-          <Title level={3} className="support-page__title">На сопровождении</Title>
-          <Flex gap="small">
-            <Button icon={<ImportOutlined />}>Импортировать</Button>
-            <Button type="primary" icon={<PlusOutlined />}>Добавить</Button>
-          </Flex>
-        </Flex>
+    <div className="support-page">
+      <Row justify="space-between" align="middle" style={{ marginBottom: 24 }}>
+        <Col>
+          <Title level={2} style={{ margin: 0 }}>
+            На сопровождении
+          </Title>
+        </Col>
+        <Col>
+          <Space>
+            <Button icon={<UploadOutlined />}>Импортировать</Button>
+            <Button type="primary" icon={<PlusOutlined />}>
+              Добавить
+            </Button>
+          </Space>
+        </Col>
+      </Row>
 
-        <Flex wrap gap={16} className="support-page__stats">
-          {statsData.map((stat, index) => (
-            <Flex key={index} vertical style={{ flex: '1 1 calc(16.66% - 14px)', minWidth: 150 }}>
-              <Card>
-                <Text type="secondary" className="support-page__stat-label">{stat.label}</Text>
-                <Title level={4} className="support-page__stat-value">{stat.value}</Title>
-              </Card>
-            </Flex>
-          ))}
-        </Flex>
-
-        <Card className="support-page__table-card">
-          <Table
-            columns={columns}
-            dataSource={supportData}
-            pagination={false}
+      <Card style={{ marginBottom: 24 }}>
+        <Space wrap>
+          <Input
+            placeholder="Поиск"
+            prefix={<SearchOutlined />}
+            style={{ width: 200 }}
           />
-        </Card>
-      </div>
-    </CrmLayout>
+          <Input placeholder="Статус" style={{ width: 120 }} />
+          <Input placeholder="Продукт" style={{ width: 120 }} />
+        </Space>
+      </Card>
+
+      <Row gutter={16} style={{ marginBottom: 24 }}>
+        {statsCards.map((card, index) => (
+          <Col key={index} span={4}>
+            <Card>
+              <Text type="secondary" style={{ fontSize: 12 }}>
+                {card.title}
+              </Text>
+              <div style={{ marginTop: 8 }}>
+                <Text strong style={{ fontSize: 24 }}>
+                  {card.value}
+                </Text>
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+
+      <Card>
+        <Table
+          dataSource={supportData}
+          columns={columns}
+          rowKey="id"
+          pagination={{ pageSize: 10 }}
+        />
+      </Card>
+    </div>
   );
 }

@@ -2,285 +2,332 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
+  Row,
+  Col,
+  Typography,
   Progress,
+  Button,
+  Badge,
   Avatar,
   List,
-  Button,
+  Tag,
   Flex,
-  Divider,
+  Space,
 } from 'antd';
 import {
+  CalendarOutlined,
   BookOutlined,
-  RightOutlined,
-  MessageOutlined,
-  PlayCircleOutlined,
-  ClockCircleOutlined,
-  RiseOutlined,
+  ArrowRightOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const studyRecommendations = [
+const statsCards = [
+  { title: '0 из 0 новых лидов', value: '0', label: 'новых лидов' },
+  { title: '0 из 0 отправлено предложений', value: '0', label: 'отправлено' },
+  { title: '0 из 0 заключено сделок', value: '0', label: 'заключено сделок' },
+  { title: 'Факт / план по выплатам', value: '0 ₽ / 0 ₽', label: 'выплаты' },
+];
+
+const todayTasks = [
   {
-    id: '1',
-    title: 'Быстрый старт: первые шаги агента',
+    id: 1,
+    type: 'Встреча',
+    title: 'Узнать решение',
+    time: 'Вчера, 09:00 - 09:00',
+  },
+];
+
+const recommendedCourses = [
+  {
+    id: 1,
+    title: 'Быстрый старт: первые шаги специалиста',
     type: 'Обязательный',
-    icon: <PlayCircleOutlined className="dashboard-page__study-icon dashboard-page__study-icon--orange" />,
-    color: '#fff7e6',
+    color: 'orange',
   },
   {
-    id: '2',
+    id: 2,
     title: 'Этика и комплаенс',
     type: 'Обязательный',
-    icon: <BookOutlined className="dashboard-page__study-icon dashboard-page__study-icon--orange" />,
-    color: '#fff7e6',
+    color: 'orange',
   },
   {
-    id: '3',
+    id: 3,
     title: 'Техники продаж',
     type: 'Рекомендованный',
-    icon: <RiseOutlined className="dashboard-page__study-icon dashboard-page__study-icon--blue" />,
-    color: '#e6f7ff',
+    color: 'blue',
   },
 ];
 
 const upcomingPayments = [
   {
-    id: '1',
+    id: 1,
     name: 'Константинопольский К.К.',
     type: 'Договор',
     status: 'Просрочено',
+    statusColor: 'red',
     avatar: 'КК',
     avatarColor: '#52c41a',
   },
   {
-    id: '2',
-    name: 'Васильков К.А.',
+    id: 2,
+    name: 'Васильев К.А.',
     type: 'Договор',
     status: 'Просрочено',
+    statusColor: 'red',
     avatar: 'ВК',
     avatarColor: '#eb2f96',
   },
   {
-    id: '3',
+    id: 3,
     name: 'Фёдорова О.С.',
     type: 'Договор',
     status: 'Просрочено',
+    statusColor: 'red',
     avatar: 'ФО',
     avatarColor: '#722ed1',
   },
 ];
 
-const todayTasks = [
-  {
-    id: '1',
-    title: 'Узнать решение',
-    time: 'Вчера, 09:00 - 09:00',
-    icon: <MessageOutlined className="dashboard-page__task-icon" />,
-  },
-];
-
 const newsItems = [
   {
-    id: '1',
-    category: 'Новость',
+    id: 1,
+    tag: 'Новость',
     title: 'Новый рекорд продаж в ноябре 2024',
   },
   {
-    id: '2',
-    category: 'Новость',
+    id: 2,
+    tag: 'Новость',
     title: 'Новогодняя акция: двойные бонусы',
   },
   {
-    id: '3',
-    category: 'Новость',
+    id: 3,
+    tag: 'Новость',
     title: 'Обновление продукта "Семейный капитал"',
   },
   {
-    id: '4',
-    category: 'Новость',
-    title: 'Итоги года: лучшие агенты получат призы',
+    id: 4,
+    tag: 'Новость',
+    title: 'Итоги года: лучшие специалисты получат призы',
   },
   {
-    id: '5',
-    category: 'Новость',
+    id: 5,
+    tag: 'Новость',
     title: 'Новый онлайн-курс по работе с возражениями',
   },
 ];
 
 export default function DashboardPage() {
   return (
-    <CrmLayout>
-      <div className="dashboard-page">
-        <div className="dashboard-page__header">
-          <Title level={3} className="dashboard-page__greeting">
-            Доброе утро, Иван! 👋
-          </Title>
-        </div>
+    <div className="dashboard-page">
+      <Title level={2} style={{ marginBottom: 24 }}>
+        Доброе утро, Иван! 👋
+      </Title>
 
-        <Card className="dashboard-page__plan-card">
-          <Text strong>План от куратора на месяц</Text>
-          <Flex className="dashboard-page__plan-stats" gap="large" align="center">
-            <div>
-              <Text type="secondary" className="dashboard-page__plan-label">0 из 0 новых лиц</Text>
-            </div>
-            <Divider type="vertical" className="dashboard-page__divider" />
-            <div>
-              <Text type="secondary" className="dashboard-page__plan-label">0 из 0 отправлено КП</Text>
-            </div>
-            <Divider type="vertical" className="dashboard-page__divider" />
-            <div>
-              <Text type="secondary" className="dashboard-page__plan-label">0 из 0 заключено сделок</Text>
-            </div>
-            <Divider type="vertical" className="dashboard-page__divider" />
-            <div>
-              <Text type="secondary" className="dashboard-page__plan-label">Факт / план по премии: 0 ₽ / 0 ₽</Text>
-            </div>
-          </Flex>
-        </Card>
-
-        <Card className="dashboard-page__tasks-card">
-          <Title level={5} className="dashboard-page__section-title">Задачи на сегодня</Title>
-          {todayTasks.map(task => (
-            <Flex key={task.id} className="dashboard-page__task-item" align="center" gap="small">
-              {task.icon}
+      {/* План от куратора */}
+      <Card style={{ marginBottom: 24 }}>
+        <Title level={5} style={{ marginBottom: 16 }}>
+          План от куратора на месяц
+        </Title>
+        <Row gutter={32}>
+          {statsCards.map((card, index) => (
+            <Col key={index} span={6}>
               <div>
-                <Text>{task.title}</Text>
-                <Text type="secondary" className="dashboard-page__task-time">
-                  <ClockCircleOutlined className="dashboard-page__clock-icon" />
-                  {task.time}
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  {card.title}
+                </Text>
+                <div style={{ marginTop: 8 }}>
+                  <Text strong style={{ fontSize: 24 }}>
+                    {card.value}
+                  </Text>
+                </div>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </Card>
+
+      {/* Задачи на сегодня */}
+      <Card style={{ marginBottom: 24 }}>
+        <Title level={5} style={{ marginBottom: 16 }}>
+          Задачи на сегодня
+        </Title>
+        <List
+          itemLayout="horizontal"
+          dataSource={todayTasks}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                avatar={<Avatar icon={<CalendarOutlined />} />}
+                title={item.type}
+                description={
+                  <div>
+                    <Text strong>{item.title}</Text>
+                    <br />
+                    <Text type="secondary">{item.time}</Text>
+                  </div>
+                }
+              />
+            </List.Item>
+          )}
+        />
+      </Card>
+
+      {/* Рекомендуем к изучению и Скоро платежи */}
+      <Row gutter={24} style={{ marginBottom: 24 }}>
+        <Col span={12}>
+          <Card title="Рекомендуем к изучению">
+            <List
+              itemLayout="horizontal"
+              dataSource={recommendedCourses}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar
+                        style={{
+                          backgroundColor:
+                            item.color === 'orange' ? '#fa8c16' : '#1890ff',
+                        }}
+                      >
+                        <BookOutlined />
+                      </Avatar>
+                    }
+                    title={item.title}
+                    description={<Tag color={item.color}>{item.type}</Tag>}
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card title="Скоро платежи">
+            <List
+              itemLayout="horizontal"
+              dataSource={upcomingPayments}
+              renderItem={(item) => (
+                <List.Item
+                  actions={[
+                    <Tag color={item.statusColor} key="status">
+                      {item.status}
+                    </Tag>,
+                  ]}
+                >
+                  <List.Item.Meta
+                    avatar={
+                      <Avatar style={{ backgroundColor: item.avatarColor }}>
+                        {item.avatar}
+                      </Avatar>
+                    }
+                    title={item.name}
+                    description={item.type}
+                  />
+                </List.Item>
+              )}
+            />
+          </Card>
+        </Col>
+      </Row>
+
+      {/* План по образованию и Мои начисления */}
+      <Row gutter={24} style={{ marginBottom: 24 }}>
+        <Col span={12}>
+          <Card title="План по образованию">
+            <Progress percent={84} status="active" strokeColor="#52c41a" />
+            <Row justify="space-between" style={{ marginTop: 8 }}>
+              <Text>3 из 12</Text>
+              <Text type="secondary">84%</Text>
+            </Row>
+            <Row justify="space-between" style={{ marginTop: 4 }}>
+              <Text type="secondary" style={{ fontSize: 12 }}>
+                Пройдено курсов
+              </Text>
+              <Text type="secondary" style={{ fontSize: 12 }}>
+                Средний балл
+              </Text>
+            </Row>
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card title="Мои начисления">
+            <Row gutter={16}>
+              <Col span={8}>
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  Текущий заработок
+                </Text>
+                <div>
+                  <Text strong style={{ fontSize: 20 }}>
+                    47 тыс. ₽
+                  </Text>
+                </div>
+              </Col>
+              <Col span={8}>
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  К выплате
+                </Text>
+                <div>
+                  <Text strong style={{ fontSize: 20 }}>
+                    14 тыс. ₽
+                  </Text>
+                </div>
+              </Col>
+              <Col span={8}>
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  Выплачено
+                </Text>
+                <div>
+                  <Text strong style={{ fontSize: 20 }}>
+                    33 тыс. ₽
+                  </Text>
+                </div>
+              </Col>
+            </Row>
+            <Row gutter={16} style={{ marginTop: 16 }}>
+              <Col span={8}>
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  Бонус
+                </Text>
+                <div>
+                  <Text strong>4%</Text>
+                </div>
+              </Col>
+              <Col span={8}>
+                <Text type="secondary" style={{ fontSize: 12 }}>
+                  Рейтинг
+                </Text>
+                <div>
+                  <Text strong>89%</Text>
+                </div>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+
+      {/* Новости */}
+      <Card
+        title="Новости"
+        extra={
+          <Button type="link" icon={<ArrowRightOutlined />}>
+            Все новости
+          </Button>
+        }
+      >
+        <Row gutter={16}>
+          {newsItems.map((item) => (
+            <Col key={item.id} span={4}>
+              <div style={{ padding: 12, background: '#f6ffed', borderRadius: 8 }}>
+                <Tag color="green">{item.tag}</Tag>
+                <Text style={{ display: 'block', marginTop: 8, fontSize: 12 }}>
+                  {item.title}
                 </Text>
               </div>
-            </Flex>
+            </Col>
           ))}
-        </Card>
-
-        <Flex wrap gap={24} className="dashboard-page__two-column">
-          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
-            <Card title="Рекомендуем к изучению" className="dashboard-page__card">
-              <List
-                itemLayout="horizontal"
-                dataSource={studyRecommendations}
-                renderItem={(item) => (
-                  <List.Item>
-                    <Flex className="dashboard-page__study-item" align="center" gap="middle">
-                      <div
-                        className="dashboard-page__study-icon-wrapper"
-                        style={{ background: item.color }}
-                      >
-                        {item.icon}
-                      </div>
-                      <div className="dashboard-page__study-content">
-                        <Text strong className="dashboard-page__study-title">{item.title}</Text>
-                        <Text type="secondary" className="dashboard-page__study-type">{item.type}</Text>
-                      </div>
-                    </Flex>
-                  </List.Item>
-                )}
-              />
-            </Card>
-          </Flex>
-
-          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
-            <Card title="Скоро платёж" className="dashboard-page__card">
-              <List
-                itemLayout="horizontal"
-                dataSource={upcomingPayments}
-                renderItem={(item) => (
-                  <List.Item>
-                    <Flex className="dashboard-page__payment-item" align="center" gap="small">
-                      <Avatar style={{ backgroundColor: item.avatarColor }}>{item.avatar}</Avatar>
-                      <div className="dashboard-page__payment-content">
-                        <Text strong className="dashboard-page__payment-name">{item.name}</Text>
-                        <Text type="secondary" className="dashboard-page__payment-type">{item.type}</Text>
-                      </div>
-                      <Text type="danger" className="dashboard-page__payment-status">{item.status}</Text>
-                    </Flex>
-                  </List.Item>
-                )}
-              />
-            </Card>
-          </Flex>
-        </Flex>
-
-        <Flex wrap gap={24} className="dashboard-page__progress-row">
-          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
-            <Card title="План по образованию" className="dashboard-page__card">
-              <div className="dashboard-page__progress-wrapper">
-                <Progress percent={84} strokeColor="#52c41a" showInfo={false} />
-              </div>
-              <Flex>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">3 из 12</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">Пройдено курсов</Text>
-                </Flex>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">84%</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">Средний балл</Text>
-                </Flex>
-              </Flex>
-            </Card>
-          </Flex>
-
-          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
-            <Card title="Мои начисления" className="dashboard-page__card">
-              <Flex gap={16}>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">47 тыс. ₽</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">Текущий заработок</Text>
-                </Flex>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">14 тыс. ₽</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">К выплате</Text>
-                </Flex>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">33 тыс. ₽</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">Выплачено</Text>
-                </Flex>
-              </Flex>
-              <Divider className="dashboard-page__earnings-divider" />
-              <Flex gap={16}>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">4%</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">КВ</Text>
-                </Flex>
-                <Flex vertical style={{ flex: 1 }}>
-                  <Title level={4} className="dashboard-page__stat-number">89%</Title>
-                  <Text type="secondary" className="dashboard-page__stat-label">Рейтинг</Text>
-                </Flex>
-              </Flex>
-            </Card>
-          </Flex>
-        </Flex>
-
-        <Card
-          title="Новости"
-          extra={
-            <Button type="text" icon={<RightOutlined />}>
-              Все новости
-            </Button>
-          }
-          className="dashboard-page__news-card"
-        >
-          <Flex className="dashboard-page__news-list" gap="middle">
-            {newsItems.map((news) => (
-              <Card
-                key={news.id}
-                hoverable
-                className="dashboard-page__news-item"
-                size="small"
-              >
-                <Text type="secondary" className="dashboard-page__news-category">{news.category}</Text>
-                <Text strong className="dashboard-page__news-title">{news.title}</Text>
-              </Card>
-            ))}
-          </Flex>
-        </Card>
-      </div>
-    </CrmLayout>
+        </Row>
+      </Card>
+    </div>
   );
 }

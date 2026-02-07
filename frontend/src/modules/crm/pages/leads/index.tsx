@@ -2,166 +2,239 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
+  Button,
+  Input,
   Table,
   Tag,
-  Button,
-  Flex,
-  Input,
-  Select,
+  Typography,
+  Space,
+  Row,
+  Col,
+  Avatar,
+  Tooltip,
 } from 'antd';
 import {
   PlusOutlined,
-  ImportOutlined,
   SearchOutlined,
-  SortAscendingOutlined,
+  UploadOutlined,
+  CalendarOutlined,
   DeleteOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const sourceOptions = [
-  { value: 'all', label: 'Все источники' },
-  { value: 'website', label: 'Заявка с сайта' },
-  { value: 'recommendation', label: 'Рекомендация' },
-  { value: 'social', label: 'Социальные сети' },
-  { value: 'call', label: 'Холодный звонок' },
-  { value: 'ad', label: 'Реклама' },
-];
+interface Lead {
+  id: number;
+  name: string;
+  phone: string;
+  source: string;
+  added: string;
+  nextAction: string;
+  status: string;
+  statusColor: string;
+}
 
-const statsData = [
-  { label: 'Всего новых лидов', value: '192' },
-  { label: 'С задачами', value: '192' },
-  { label: 'Без задач', value: '0' },
-];
-
-const leadsData = [
+const leadsData: Lead[] = [
   {
-    key: '1',
-    client: 'Черных Е. А.',
+    id: 1,
+    name: 'Черных Е. А.',
     phone: '+7 (900) 100-00-17',
     source: '—',
     added: '11 янв.',
     nextAction: '—',
     status: 'Готов к сделке',
-    statusColor: 'green',
+    statusColor: 'success',
   },
   {
-    key: '2',
-    client: 'Григорьева Е. И.',
+    id: 2,
+    name: 'Григорьева Е. И.',
     phone: '+7 (999) 567-89-01',
     source: 'Заявка с сайта',
     added: '3 янв.',
     nextAction: '—',
     status: 'Новый',
-    statusColor: 'purple',
+    statusColor: 'default',
   },
   {
-    key: '3',
-    client: 'Петрова М. А.',
+    id: 3,
+    name: 'Петрова М. А.',
     phone: '+7 (123) 456-78-90',
     source: 'Рекомендация',
     added: '2 янв.',
     nextAction: '—',
     status: 'Новый',
-    statusColor: 'purple',
+    statusColor: 'default',
   },
   {
-    key: '4',
-    client: 'Романов А. С.',
+    id: 4,
+    name: 'Романов А. С.',
     phone: '+7 (999) 345-67-89',
     source: 'Заявка с сайта',
     added: '2 янв.',
     nextAction: '—',
     status: 'Новый',
-    statusColor: 'purple',
+    statusColor: 'default',
   },
+  {
+    id: 5,
+    name: 'Лебедева О. Д.',
+    phone: '+7 (999) 890-12-34',
+    source: 'Социальные сети',
+    added: '1 янв.',
+    nextAction: '—',
+    status: 'Новый',
+    statusColor: 'default',
+  },
+  {
+    id: 6,
+    name: 'Орлова А. М.',
+    phone: '+7 (123) 456-78-90',
+    source: 'Холодный звонок',
+    added: '1 янв.',
+    nextAction: '—',
+    status: 'Квалификация',
+    statusColor: 'processing',
+  },
+  {
+    id: 7,
+    name: 'Волкова О. Н.',
+    phone: '+7 (999) 567-89-01',
+    source: 'Реклама',
+    added: '21 дек.',
+    nextAction: '—',
+    status: 'Новый',
+    statusColor: 'default',
+  },
+  {
+    id: 8,
+    name: 'Новикова М. И.',
+    phone: '+7 (999) 345-67-89',
+    source: 'Холодный звонок',
+    added: '18 дек.',
+    nextAction: '—',
+    status: 'Новый',
+    statusColor: 'default',
+  },
+];
+
+const statsCards = [
+  { title: 'Всего новых лидов', value: '192' },
+  { title: 'С задачами', value: '192' },
+  { title: 'Без задач', value: '0' },
 ];
 
 const columns = [
   {
     title: 'Клиент',
-    dataIndex: 'client',
-    key: 'client',
-    render: (text: string, record: typeof leadsData[0]) => (
+    dataIndex: 'name',
+    key: 'name',
+    render: (name: string, record: Lead) => (
       <div>
-        <Text strong>{text}</Text>
+        <Text strong>{name}</Text>
         <br />
-        <Text type="secondary" className="leads-page__phone">{record.phone}</Text>
+        <Text type="secondary" style={{ fontSize: 12 }}>
+          {record.phone}
+        </Text>
       </div>
     ),
   },
-  { title: 'Источник', dataIndex: 'source', key: 'source' },
-  { title: 'Добавлен', dataIndex: 'added', key: 'added' },
-  { title: 'След. действие', dataIndex: 'nextAction', key: 'nextAction' },
+  {
+    title: 'Источник',
+    dataIndex: 'source',
+    key: 'source',
+  },
+  {
+    title: 'Добавлен',
+    dataIndex: 'added',
+    key: 'added',
+  },
+  {
+    title: 'След. действие',
+    dataIndex: 'nextAction',
+    key: 'nextAction',
+  },
   {
     title: 'Статус',
     dataIndex: 'status',
     key: 'status',
-    render: (status: string, record: typeof leadsData[0]) => (
-      <Tag color={record.statusColor} className="leads-page__status-tag">{status}</Tag>
+    render: (status: string, record: Lead) => (
+      <Tag color={record.statusColor === 'success' ? 'green' : record.statusColor === 'processing' ? 'blue' : 'default'}>
+        {status}
+      </Tag>
     ),
   },
   {
     title: 'Действия',
     key: 'actions',
     render: () => (
-      <Flex gap="small">
-        <Button icon={<SortAscendingOutlined />} size="small" />
-        <Button icon={<DeleteOutlined />} size="small" danger />
-      </Flex>
+      <Space>
+        <Tooltip title="Добавить задачу">
+          <Button type="text" icon={<CalendarOutlined />} size="small" />
+        </Tooltip>
+        <Tooltip title="Удалить">
+          <Button type="text" icon={<DeleteOutlined />} size="small" danger />
+        </Tooltip>
+      </Space>
     ),
   },
 ];
 
 export default function LeadsPage() {
   return (
-    <CrmLayout>
-      <div className="leads-page">
-        <Flex className="leads-page__header" justify="space-between" align="center">
-          <Title level={3} className="leads-page__title">Новые лиды</Title>
-          <Flex gap="small">
-            <Button icon={<ImportOutlined />}>Импортировать</Button>
-            <Button type="primary" icon={<PlusOutlined />}>Добавить</Button>
-          </Flex>
-        </Flex>
+    <div className="leads-page">
+      <Row justify="space-between" align="middle" style={{ marginBottom: 24 }}>
+        <Col>
+          <Title level={2} style={{ margin: 0 }}>
+            Новые лиды
+          </Title>
+        </Col>
+        <Col>
+          <Space>
+            <Button icon={<UploadOutlined />}>Импортировать</Button>
+            <Button type="primary" icon={<PlusOutlined />}>
+              Добавить
+            </Button>
+          </Space>
+        </Col>
+      </Row>
 
-        <Flex className="leads-page__filters" wrap gap="small">
+      <Card style={{ marginBottom: 24 }}>
+        <Space wrap>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
-            className="leads-page__search-input"
+            style={{ width: 200 }}
           />
-          <Select
-            placeholder="Источник"
-            className="leads-page__filter-select"
-            options={sourceOptions}
-          />
-          <Button icon={<SortAscendingOutlined />} />
-        </Flex>
+          <Input placeholder="Источник" style={{ width: 150 }} />
+        </Space>
+      </Card>
 
-        <Flex wrap gap={16} className="leads-page__stats">
-          {statsData.map((stat, index) => (
-            <Flex key={index} vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 180 }}>
-              <Card>
-                <Text type="secondary" className="leads-page__stat-label">{stat.label}</Text>
-                <Title level={4} className="leads-page__stat-value">{stat.value}</Title>
-              </Card>
-            </Flex>
-          ))}
-        </Flex>
+      <Row gutter={16} style={{ marginBottom: 24 }}>
+        {statsCards.map((card, index) => (
+          <Col key={index} span={8}>
+            <Card>
+              <Text type="secondary" style={{ fontSize: 12 }}>
+                {card.title}
+              </Text>
+              <div style={{ marginTop: 8 }}>
+                <Text strong style={{ fontSize: 32 }}>
+                  {card.value}
+                </Text>
+              </div>
+            </Card>
+          </Col>
+        ))}
+      </Row>
 
-        <Card className="leads-page__table-card">
-          <Table
-            columns={columns}
-            dataSource={leadsData}
-            pagination={false}
-          />
-        </Card>
-      </div>
-    </CrmLayout>
+      <Card>
+        <Table
+          dataSource={leadsData}
+          columns={columns}
+          rowKey="id"
+          pagination={{ pageSize: 10 }}
+        />
+      </Card>
+    </div>
   );
 }

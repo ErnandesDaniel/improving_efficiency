@@ -2,73 +2,87 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
-  Flex,
+  Typography,
+  Row,
+  Col,
+  Statistic,
 } from 'antd';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const quarterGoals = {
-  leads: 30,
-  kp: 15,
-  contracts: 10,
-  collection: '500K₽',
-};
-
-const yearGoals = {
-  leads: 120,
-  kp: 60,
-  contracts: 40,
-  collection: '2M₽',
-};
-
-const GoalCard = ({ title, stats }: { title: string; stats: typeof quarterGoals }) => (
-  <Card className="goals-page__goal-card">
-    <Text strong className="goals-page__goal-title">{title}</Text>
-    <Flex className="goals-page__goal-stats" justify="space-between">
-      <div className="goals-page__stat">
-        <Text type="secondary" className="goals-page__stat-label">Лиды</Text>
-        <Title level={4} className="goals-page__stat-value">{stats.leads}</Title>
-      </div>
-      <div className="goals-page__stat">
-        <Text type="secondary" className="goals-page__stat-label">КП</Text>
-        <Title level={4} className="goals-page__stat-value">{stats.kp}</Title>
-      </div>
-      <div className="goals-page__stat">
-        <Text type="secondary" className="goals-page__stat-label">Договоры</Text>
-        <Title level={4} className="goals-page__stat-value">{stats.contracts}</Title>
-      </div>
-      <div className="goals-page__stat">
-        <Text type="secondary" className="goals-page__stat-label">Сборы</Text>
-        <Title level={4} className="goals-page__stat-value">{stats.collection}</Title>
-      </div>
-    </Flex>
-  </Card>
-);
-
 export default function GoalsPage() {
   return (
-    <CrmLayout>
-      <div className="goals-page">
-        <div className="goals-page__header">
-          <Title level={3} className="goals-page__title">Мои цели</Title>
-          <Text type="secondary" className="goals-page__subtitle">
-            Ваши планы на период
-          </Text>
-        </div>
+    <div className="goals-page">
+      <Title level={2} style={{ marginBottom: 8 }}>
+        Мои цели
+      </Title>
+      <Text type="secondary" style={{ display: 'block', marginBottom: 24 }}>
+        Ваши планы на период
+      </Text>
 
-        <Flex wrap gap={24} className="goals-page__grid">
-          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
-            <GoalCard title="Квартал" stats={quarterGoals} />
-          </Flex>
-          <Flex vertical style={{ flex: '1 1 calc(50% - 12px)', minWidth: 300 }}>
-            <GoalCard title="Год" stats={yearGoals} />
-          </Flex>
-        </Flex>
-      </div>
-    </CrmLayout>
+      <Row gutter={24}>
+        <Col span={12}>
+          <Card title="Квартал">
+            <Row gutter={16}>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Лиды</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>30</Text>
+              </Col>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>КП</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>15</Text>
+              </Col>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Договоры</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>10</Text>
+              </Col>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Сборы</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>500К₽</Text>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+        <Col span={12}>
+          <Card title="Год">
+            <Row gutter={16}>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Лиды</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>120</Text>
+              </Col>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>КП</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>60</Text>
+              </Col>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Договоры</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>40</Text>
+              </Col>
+              <Col span={6}>
+                <div style={{ marginBottom: 8 }}>
+                  <Text type="secondary" style={{ fontSize: 12 }}>Сборы</Text>
+                </div>
+                <Text strong style={{ fontSize: 24 }}>2М₽</Text>
+              </Col>
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+    </div>
   );
 }

@@ -1,33 +1,33 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Typography,
-  Button,
   Card,
+  Button,
+  Input,
   Table,
   Tag,
-  Flex,
-  Input,
-  Badge,
+  Typography,
+  Space,
+  Row,
+  Col,
+  Select,
 } from 'antd';
 import {
   PlusOutlined,
   SearchOutlined,
-  ArrowUpOutlined,
-  CloseOutlined,
+  FilterOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
+const { Option } = Select;
 
 interface Deal {
-  key: string;
+  id: number;
   client: string;
   product: string;
-  amount: number;
-  closeDate: string;
+  amount: string;
+  closePlan: string;
   nextAction: string;
   updated: string;
   stage: string;
@@ -36,60 +36,68 @@ interface Deal {
 
 const dealsData: Deal[] = [
   {
-    key: '1',
+    id: 1,
     client: 'Неизвестный клиент',
     product: 'Премиум 7+',
-    amount: 36000,
-    closeDate: '4 февр.',
-    nextAction: '',
+    amount: '36 000 ₽',
+    closePlan: '4 февр.',
+    nextAction: '—',
     updated: '20 янв.',
     stage: 'КП',
     stageColor: 'gold',
   },
   {
-    key: '2',
+    id: 2,
     client: 'Неизвестный клиент',
     product: 'Солнышко 7+',
-    amount: 24000,
-    closeDate: '28 янв.',
-    nextAction: '',
+    amount: '24 000 ₽',
+    closePlan: '28 янв.',
+    nextAction: '—',
     updated: '21 янв.',
     stage: 'Оплата',
-    stageColor: 'orange',
+    stageColor: 'green',
   },
   {
-    key: '3',
+    id: 3,
     client: 'Неизвестный клиент',
     product: 'Глория',
-    amount: 15000,
-    closeDate: '23 янв.',
-    nextAction: '',
+    amount: '15 000 ₽',
+    closePlan: '23 янв.',
+    nextAction: '—',
     updated: '21 янв.',
     stage: 'Подписание',
-    stageColor: 'purple',
-  },
-  {
-    key: '4',
-    client: 'Неизвестный клиент',
-    product: 'Гардиа 7+',
-    amount: 18000,
-    closeDate: '24 янв.',
-    nextAction: '',
-    updated: '20 янв.',
-    stage: 'Оформление',
     stageColor: 'blue',
   },
   {
-    key: '5',
+    id: 4,
     client: 'Неизвестный клиент',
-    product: 'Гранде',
-    amount: 48000,
-    closeDate: '11 февр.',
-    nextAction: '',
-    updated: '19 янв.',
-    stage: 'Переговоры',
+    product: 'Гардия 7+',
+    amount: '18 000 ₽',
+    closePlan: '24 янв.',
+    nextAction: '—',
+    updated: '20 янв.',
+    stage: 'Оформление',
     stageColor: 'cyan',
   },
+  {
+    id: 5,
+    client: 'Неизвестный клиент',
+    product: 'Гранде',
+    amount: '48 000 ₽',
+    closePlan: '11 февр.',
+    nextAction: '—',
+    updated: '19 янв.',
+    stage: 'Переговоры',
+    stageColor: 'purple',
+  },
+];
+
+const statsCards = [
+  { title: 'Цель на месяц', value: '—' },
+  { title: 'Прогноз до конца месяца', value: '5 940 ₽' },
+  { title: 'Продано с начала недели', value: '0 ₽' },
+  { title: 'КП отправлено / в работе', value: '0 / 1' },
+  { title: 'Средний цикл сделки', value: '—' },
 ];
 
 const columns = [
@@ -97,7 +105,6 @@ const columns = [
     title: 'Клиент',
     dataIndex: 'client',
     key: 'client',
-    ellipsis: true,
   },
   {
     title: 'Продукт',
@@ -108,18 +115,16 @@ const columns = [
     title: 'Сумма',
     dataIndex: 'amount',
     key: 'amount',
-    render: (amount: number) => `${amount.toLocaleString()} ₽`,
   },
   {
     title: 'План закрытия',
-    dataIndex: 'closeDate',
-    key: 'closeDate',
+    dataIndex: 'closePlan',
+    key: 'closePlan',
   },
   {
     title: 'След. действие',
     dataIndex: 'nextAction',
     key: 'nextAction',
-    render: (action: string) => action || '—',
   },
   {
     title: 'Обновлена',
@@ -137,94 +142,64 @@ const columns = [
 ];
 
 export default function DealsPage() {
-  const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: (newSelectedRowKeys: React.Key[]) => {
-      setSelectedRowKeys(newSelectedRowKeys);
-    },
-  };
-
   return (
-    <CrmLayout>
-      <div className="deals-page">
-        <Flex className="deals-page__header" justify="space-between" align="center">
-          <Title level={3} className="deals-page__title">Сделки</Title>
-          <Button type="primary" icon={<PlusOutlined />} size="large">
+    <div className="deals-page">
+      <Row justify="space-between" align="middle" style={{ marginBottom: 24 }}>
+        <Col>
+          <Title level={2} style={{ margin: 0 }}>
+            Сделки
+          </Title>
+        </Col>
+        <Col>
+          <Button type="primary" icon={<PlusOutlined />}>
             Создать
           </Button>
-        </Flex>
+        </Col>
+      </Row>
 
-        <Flex className="deals-page__filters" wrap gap="small" align="center">
+      <Card style={{ marginBottom: 24 }}>
+        <Space wrap>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
-            className="deals-page__search-input"
+            style={{ width: 200 }}
           />
-          <Button 
-            type="primary" 
-            className="deals-page__filter-btn deals-page__filter-btn--active"
-            icon={<CloseOutlined style={{ fontSize: 10 }} />}
-            iconPosition="end"
-          >
+          <Tag closable color="blue">
             Только открытые
-          </Button>
-          <Button className="deals-page__filter-btn">Продукт</Button>
-          <Button className="deals-page__filter-btn">Прогноз</Button>
-          <Button className="deals-page__filter-btn">Обновлена</Button>
-          <Button className="deals-page__filter-btn">Этап воронки</Button>
-          <Button icon={<ArrowUpOutlined />} />
-        </Flex>
+          </Tag>
+          <Select placeholder="Продукт" style={{ width: 120 }} />
+          <Select placeholder="Прогноз" style={{ width: 120 }} />
+          <Select placeholder="Обновлена" style={{ width: 120 }} />
+          <Select placeholder="Этап воронки" style={{ width: 150 }} />
+          <Button icon={<FilterOutlined />} />
+        </Space>
+      </Card>
 
-        <Flex wrap gap={16} className="deals-page__stats">
-          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
+      <Row gutter={16} style={{ marginBottom: 24 }}>
+        {statsCards.map((card, index) => (
+          <Col key={index} span={4}>
             <Card>
-              <Text type="secondary">Цель на месяц</Text>
-              <Title level={4} className="deals-page__stat-value">—</Title>
-            </Card>
-          </Flex>
-          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
-            <Card>
-              <Text type="secondary">
-                Прогноз до конца месяца
-                <Badge status="processing" className="deals-page__badge" />
+              <Text type="secondary" style={{ fontSize: 12 }}>
+                {card.title}
               </Text>
-              <Title level={4} className="deals-page__stat-value">5 940 ₽</Title>
+              <div style={{ marginTop: 8 }}>
+                <Text strong style={{ fontSize: 18 }}>
+                  {card.value}
+                </Text>
+              </div>
             </Card>
-          </Flex>
-          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
-            <Card>
-              <Text type="secondary">Продано с начала месяца</Text>
-              <Title level={4} className="deals-page__stat-value">0 ₽</Title>
-            </Card>
-          </Flex>
-          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
-            <Card>
-              <Text type="secondary">КП отправлено / в работе</Text>
-              <Title level={4} className="deals-page__stat-value">0 / 1</Title>
-            </Card>
-          </Flex>
-        </Flex>
+          </Col>
+        ))}
+      </Row>
 
-        <Flex wrap gap={16} className="deals-page__stats">
-          <Flex vertical style={{ flex: '1 1 calc(25% - 12px)', minWidth: 200 }}>
-            <Card>
-              <Text type="secondary">Средний цикл сделки</Text>
-              <Title level={4} className="deals-page__stat-value">—</Title>
-            </Card>
-          </Flex>
-        </Flex>
-
-        <Card className="deals-page__table-card">
-          <Table
-            rowSelection={rowSelection}
-            columns={columns}
-            dataSource={dealsData}
-            pagination={false}
-          />
-        </Card>
-      </div>
-    </CrmLayout>
+      <Card>
+        <Table
+          dataSource={dealsData}
+          columns={columns}
+          rowKey="id"
+          pagination={{ pageSize: 10 }}
+        />
+      </Card>
+    </div>
   );
 }

@@ -1,96 +1,103 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Typography,
   Card,
+  Typography,
+  Row,
+  Col,
   Tabs,
   Tag,
   Progress,
-  Button,
-  Flex,
 } from 'antd';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
+const { TabPane } = Tabs;
 
-const coursesData = [
+interface Course {
+  id: number;
+  title: string;
+  description: string;
+  level: string;
+  levelColor: string;
+  lessons: number;
+  progress: number;
+  image: string;
+}
+
+const coursesData: Course[] = [
   {
-    id: '1',
+    id: 1,
     title: 'Этика и комплаенс',
-    description: 'Основы профессиональной этики страхового агента. Защи...',
+    description: 'Основы профессиональной этики агента. Защита...',
     level: 'Начинающий',
-    levelColor: 'green',
+    levelColor: 'success',
     lessons: 3,
     progress: 0,
     image: '📋',
   },
   {
-    id: '2',
+    id: 2,
     title: 'Продуктовая линейка',
-    description: 'Изучение страховых продуктов компании. НСЖ, ИСЖ и кросс-...',
+    description: 'Изучение продуктов компании. Базовые и продвинутые программы...',
     level: 'Средний',
-    levelColor: 'orange',
+    levelColor: 'warning',
     lessons: 3,
-    progress: 100,
+    progress: 0,
     image: '🏠',
   },
   {
-    id: '3',
+    id: 3,
     title: 'Техники продаж',
     description: 'Эффективные методы работы с клиентами. Телефонные...',
     level: 'Средний',
-    levelColor: 'orange',
+    levelColor: 'warning',
     lessons: 5,
-    progress: 100,
+    progress: 0,
     image: '📞',
   },
   {
-    id: '4',
+    id: 4,
     title: 'Сложные переговоры',
     description: 'Техники ведения сложных переговоров. Работа с отказами...',
     level: 'Продвинутый',
-    levelColor: 'red',
-    lessons: 4,
-    progress: 25,
-    image: '🤝',
-  },
-];
-
-const webinarsData = [
-  {
-    id: '1',
-    title: 'VIP-клиенты',
-    description: 'Особенности работы с состоятельными клиентами...',
-    level: 'Продвинутый',
-    levelColor: 'red',
+    levelColor: 'error',
     lessons: 4,
     progress: 0,
-    image: '👔',
+    image: '🤝',
   },
   {
-    id: '2',
-    title: 'Профессиональный стандарт «Страховой...',
-    description: 'Профессиональный стандарт от Минтруда. Требования к...',
+    id: 5,
+    title: 'VIP-клиенты',
+    description: 'Особенности работы с состоятельными клиентами....',
+    level: 'Продвинутый',
+    levelColor: 'error',
+    lessons: 4,
+    progress: 0,
+    image: '💼',
+  },
+  {
+    id: 6,
+    title: 'Профессиональный стандарт',
+    description: 'Профессиональный стандарт. Требования к...',
     level: 'Средний',
-    levelColor: 'orange',
+    levelColor: 'warning',
     lessons: 4,
     progress: 0,
     image: '📜',
   },
   {
-    id: '3',
-    title: 'Базовый экзамен ЦБ',
-    description: 'Квалификационный экзамен для специалистов финансового...',
+    id: 7,
+    title: 'Базовый экзамен',
+    description: 'Квалификационный экзамен для специалистов...',
     level: 'Продвинутый',
-    levelColor: 'red',
+    levelColor: 'error',
     lessons: 6,
     progress: 0,
-    image: '🏦',
+    image: '🏛️',
   },
   {
-    id: '4',
+    id: 8,
     title: 'Новый курс',
     description: '',
     level: '',
@@ -101,72 +108,72 @@ const webinarsData = [
   },
 ];
 
-const CourseCard = ({ course }: { course: typeof coursesData[0] }) => (
-  <Card hoverable className="training-page__card">
-    <div className="training-page__card-image">{course.image}</div>
-    <Title level={5} className="training-page__card-title">{course.title}</Title>
-    <Text className="training-page__card-description">{course.description}</Text>
-    <Flex className="training-page__card-meta" gap="small">
-      {course.level && <Tag color={course.levelColor}>{course.level}</Tag>}
-      <Text type="secondary">{course.lessons} уроков</Text>
-    </Flex>
-    <div className="training-page__progress-wrapper">
-      <Progress percent={course.progress} showInfo={false} strokeColor={course.progress === 100 ? '#52c41a' : '#fa8c16'} />
-      <Text type="secondary" className="training-page__progress-text">0 / {course.lessons} уроков</Text>
+const CourseCard = ({ course }: { course: Course }) => (
+  <Card
+    hoverable
+    style={{ height: '100%' }}
+    cover={
+      <div
+        style={{
+          height: 140,
+          background: course.id % 2 === 0 ? '#f6ffed' : '#e6f7ff',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: 60,
+        }}
+      >
+        {course.image}
+      </div>
+    }
+  >
+    <div style={{ marginBottom: 8 }}>
+      <Tag color={course.levelColor}>{course.level}</Tag>
     </div>
+    <Title level={5} style={{ marginBottom: 8 }}>
+      {course.title}
+    </Title>
+    <Text type="secondary" style={{ fontSize: 12, display: 'block', marginBottom: 12 }}>
+      {course.description}
+    </Text>
+    <Progress percent={course.progress} size="small" />
+    <Text type="secondary" style={{ fontSize: 12 }}>
+      {course.progress} / {course.lessons} уроков
+    </Text>
   </Card>
 );
 
 export default function TrainingPage() {
-  const [activeTab, setActiveTab] = useState('courses');
-
   return (
-    <CrmLayout>
-      <div className="training-page">
-        <div className="training-page__header">
-          <Title level={3} className="training-page__title">Обучение</Title>
-          <Text type="secondary" className="training-page__subtitle">
-            Курсы, вебинары и ответы на частые вопросы
-          </Text>
-        </div>
+    <div className="training-page">
+      <Title level={2} style={{ marginBottom: 8 }}>
+        Обучение
+      </Title>
+      <Text type="secondary" style={{ display: 'block', marginBottom: 24 }}>
+        Курсы, вебинары и ответы на частые вопросы
+      </Text>
 
-        <Tabs
-          activeKey={activeTab}
-          onChange={setActiveTab}
-          className="training-page__tabs"
-          items={[
-            { key: 'courses', label: 'Курсы' },
-            { key: 'webinars', label: 'Вебинары' },
-            { key: 'faq', label: 'Частые вопросы' },
-          ]}
-        />
-
-        {activeTab === 'courses' && (
-          <Flex wrap gap={24} className="training-page__grid">
+      <Tabs defaultActiveKey="courses">
+        <TabPane tab="Курсы" key="courses">
+          <Row gutter={[24, 24]}>
             {coursesData.map((course) => (
-              <Flex key={course.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 260 }}>
+              <Col key={course.id} span={6}>
                 <CourseCard course={course} />
-              </Flex>
+              </Col>
             ))}
-          </Flex>
-        )}
-
-        {activeTab === 'webinars' && (
-          <Flex wrap gap={24} className="training-page__grid">
-            {webinarsData.map((course) => (
-              <Flex key={course.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 260 }}>
-                <CourseCard course={course} />
-              </Flex>
-            ))}
-          </Flex>
-        )}
-
-        {activeTab === 'faq' && (
-          <Card className="training-page__faq-card">
-            <Text>Раздел в разработке</Text>
+          </Row>
+        </TabPane>
+        <TabPane tab="Вебинары" key="webinars">
+          <Card>
+            <Text>Вебинары (в разработке)</Text>
           </Card>
-        )}
-      </div>
-    </CrmLayout>
+        </TabPane>
+        <TabPane tab="Частые вопросы" key="faq">
+          <Card>
+            <Text>Частые вопросы (в разработке)</Text>
+          </Card>
+        </TabPane>
+      </Tabs>
+    </div>
   );
 }

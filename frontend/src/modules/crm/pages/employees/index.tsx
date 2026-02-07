@@ -2,100 +2,163 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
-  Avatar,
+  Typography,
+  Row,
+  Col,
   Input,
-  Select,
+  Avatar,
   Button,
-  Flex,
+  Space,
 } from 'antd';
 import {
   SearchOutlined,
-  SortAscendingOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const groupOptions = [
-  { value: 'all', label: 'Все группы' },
-  { value: 'agents', label: 'Агенты' },
-  { value: 'managers', label: 'Руководители' },
+interface Employee {
+  id: number;
+  initials: string;
+  name: string;
+  role: string;
+  color: string;
+}
+
+const employeesData: Employee[] = [
+  {
+    id: 1,
+    initials: 'ЛН',
+    name: 'Лебедев Николай Дмитриевич',
+    role: 'Агент',
+    color: '#1890ff',
+  },
+  {
+    id: 2,
+    initials: 'СО',
+    name: 'Соколова Ольга Петровна',
+    role: 'Агент',
+    color: '#722ed1',
+  },
+  {
+    id: 3,
+    initials: 'МС',
+    name: 'Морозов Сергей Иванович',
+    role: 'Агент',
+    color: '#13c2c2',
+  },
+  {
+    id: 4,
+    initials: 'НА',
+    name: 'Новикова Анна Александровна',
+    role: 'Агент',
+    color: '#eb2f96',
+  },
+  {
+    id: 5,
+    initials: 'КТ',
+    name: 'Кузнецова Татьяна Михайловна',
+    role: 'Агент',
+    color: '#fa8c16',
+  },
+  {
+    id: 6,
+    initials: 'ПМ',
+    name: 'Петрова Мария Сергеевна',
+    role: 'Руководитель',
+    color: '#f5222d',
+  },
+  {
+    id: 7,
+    initials: 'СА',
+    name: 'Сидоров Алексей Петрович',
+    role: 'Куратор',
+    color: '#52c41a',
+  },
+  {
+    id: 8,
+    initials: 'СА',
+    name: 'Смирнов Андрей Викторович',
+    role: 'Администратор',
+    color: '#2f54eb',
+  },
+  {
+    id: 9,
+    initials: 'КЕ',
+    name: 'Козлова Елена Александровна',
+    role: 'Редактор',
+    color: '#fa541c',
+  },
+  {
+    id: 10,
+    initials: 'ВД',
+    name: 'Волков Дмитрий Сергеевич',
+    role: 'Агент',
+    color: '#faad14',
+  },
+  {
+    id: 11,
+    initials: 'ИИ',
+    name: 'Иванов Иван Иванович',
+    role: 'Агент',
+    color: '#a0d911',
+  },
 ];
 
-const roleOptions = [
-  { value: 'all', label: 'Все роли' },
-  { value: 'agent', label: 'Агент' },
-  { value: 'supervisor', label: 'Куратор' },
-  { value: 'admin', label: 'Администратор' },
-];
-
-const employeesData = [
-  { id: '1', initials: 'ЛН', name: 'Лебедев Николай Дмитриевич', role: 'Агент', color: '#1890ff' },
-  { id: '2', initials: 'СО', name: 'Соколова Ольга Петровна', role: 'Агент', color: '#722ed1' },
-  { id: '3', initials: 'МС', name: 'Морозов Сергей Иванович', role: 'Агент', color: '#1890ff' },
-  { id: '4', initials: 'НА', name: 'Новикова Анна Александровна', role: 'Агент', color: '#ff4d4f' },
-  { id: '5', initials: 'КТ', name: 'Кузнецова Татьяна Михайловна', role: 'Агент', color: '#fa8c16' },
-  { id: '6', initials: 'ПМ', name: 'Петрова Мария Сергеевна', role: 'Руководитель', color: '#eb2f96' },
-  { id: '7', initials: 'СА', name: 'Сидоров Алексей Петрович', role: 'Куратор', color: '#722ed1' },
-  { id: '8', initials: 'СА', name: 'Смирнов Андрей Викторович', role: 'Администратор', color: '#13c2c2' },
-  { id: '9', initials: 'КЕ', name: 'Козлова Елена Александровна', role: 'Редактор', color: '#2f54eb' },
-  { id: '10', initials: 'ВД', name: 'Волков Дмитрий Сергеевич', role: 'Агент', color: '#ff4d4f' },
-  { id: '11', initials: 'ИИ', name: 'Иванов Иван Иванович', role: 'Агент', color: '#722ed1' },
-];
+const EmployeeCard = ({ employee }: { employee: Employee }) => (
+  <Card style={{ textAlign: 'center' }}>
+    <Avatar
+      size={64}
+      style={{
+        backgroundColor: employee.color,
+        marginBottom: 16,
+        fontSize: 24,
+      }}
+    >
+      {employee.initials}
+    </Avatar>
+    <Title level={5} style={{ marginBottom: 4 }}>
+      {employee.name}
+    </Title>
+    <Text type="secondary">{employee.role}</Text>
+  </Card>
+);
 
 export default function EmployeesPage() {
   return (
-    <CrmLayout>
-      <div className="employees-page">
-        <div className="employees-page__header">
-          <Title level={3} className="employees-page__title">Сотрудники</Title>
-          <Text type="secondary" className="employees-page__subtitle">
-            Коллеги и эксперты компании
-          </Text>
-        </div>
+    <div className="employees-page">
+      <Title level={2} style={{ marginBottom: 8 }}>
+        Сотрудники
+      </Title>
+      <Text type="secondary" style={{ display: 'block', marginBottom: 24 }}>
+        Коллеги и эксперты компании
+      </Text>
 
-        <Flex className="employees-page__filters" wrap gap="small">
+      <Card style={{ marginBottom: 24 }}>
+        <Space>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
-            className="employees-page__search-input"
+            style={{ width: 200 }}
           />
-          <Select
-            placeholder="Группа"
-            className="employees-page__filter-select"
-            options={groupOptions}
-          />
-          <Select
-            placeholder="Роль"
-            className="employees-page__filter-select"
-            options={roleOptions}
-          />
-          <Button icon={<SortAscendingOutlined />} />
-        </Flex>
+          <Input placeholder="Группа" style={{ width: 120 }} />
+          <Input placeholder="Роль" style={{ width: 120 }} />
+          <Button.Group>
+            <Button icon={<ArrowUpOutlined />} />
+            <Button icon={<ArrowDownOutlined />} />
+          </Button.Group>
+        </Space>
+      </Card>
 
-        <Flex wrap gap={24} className="employees-page__grid">
-          {employeesData.map((employee) => (
-            <Flex key={employee.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 240 }}>
-              <Card hoverable className="employees-page__card">
-                <Flex vertical align="center" gap="middle">
-                  <Avatar
-                    size={64}
-                    style={{ backgroundColor: employee.color }}
-                    className="employees-page__avatar"
-                  >
-                    {employee.initials}
-                  </Avatar>
-                  <Text strong className="employees-page__name">{employee.name}</Text>
-                  <Text type="secondary" className="employees-page__role">{employee.role}</Text>
-                </Flex>
-              </Card>
-            </Flex>
-          ))}
-        </Flex>
-      </div>
-    </CrmLayout>
+      <Row gutter={[24, 24]}>
+        {employeesData.map((employee) => (
+          <Col key={employee.id} span={6}>
+            <EmployeeCard employee={employee} />
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 }

@@ -2,25 +2,40 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
+  Typography,
+  Row,
+  Col,
   Table,
   Tag,
   Button,
-  Flex,
+  Space,
 } from 'antd';
 import {
-  SortAscendingOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const paymentsData = [
+interface Payment {
+  id: number;
+  amount: string;
+  date: string;
+  type: string;
+  contractTerm: string;
+  contractNumber: string;
+  premium: string;
+  percent: string;
+  product: string;
+  client: string;
+  payment: string;
+}
+
+const paymentsData: Payment[] = [
   {
-    key: '1',
-    amount: '+18 000 ₽',
+    id: 1,
+    amount: '+18 0...',
     date: '31.12.2025',
     type: 'Бонус',
     contractTerm: '—',
@@ -29,10 +44,10 @@ const paymentsData = [
     percent: '—',
     product: 'Бонус',
     client: '—',
-    payout: '31.01.2026',
+    payment: '31.01.2026',
   },
   {
-    key: '2',
+    id: 2,
     amount: '5 500 ₽',
     date: '02.01.2026',
     type: 'Бонус',
@@ -42,10 +57,10 @@ const paymentsData = [
     percent: '—',
     product: 'Бонус',
     client: '—',
-    payout: '—',
+    payment: '',
   },
   {
-    key: '3',
+    id: 3,
     amount: '8 500 ₽',
     date: '05.01.2026',
     type: 'Первичная',
@@ -55,11 +70,11 @@ const paymentsData = [
     percent: '10%',
     product: 'Бонус',
     client: '—',
-    payout: '—',
+    payment: '',
   },
   {
-    key: '4',
-    amount: '+15 000 ₽',
+    id: 4,
+    amount: '+15 0...',
     date: '15.12.2025',
     type: 'Первичная',
     contractTerm: '—',
@@ -68,8 +83,13 @@ const paymentsData = [
     percent: '12.5%',
     product: 'Бонус',
     client: '—',
-    payout: '15.01.2026',
+    payment: '15.01.2026',
   },
+];
+
+const statsCards = [
+  { title: 'Премии', value: '205 000 ₽' },
+  { title: 'Комиссии', value: '47 000 ₽' },
 ];
 
 const columns = [
@@ -78,7 +98,7 @@ const columns = [
     dataIndex: 'amount',
     key: 'amount',
     render: (amount: string) => (
-      <Text className={amount.startsWith('+') ? 'payments-page__amount-positive' : ''}>
+      <Text style={{ color: amount.startsWith('+') ? '#52c41a' : 'inherit' }}>
         {amount}
       </Text>
     ),
@@ -92,7 +112,6 @@ const columns = [
     title: 'Тип комиссии',
     dataIndex: 'type',
     key: 'type',
-    render: (type: string) => <Tag>{type}</Tag>,
   },
   {
     title: 'Срок договора',
@@ -126,46 +145,50 @@ const columns = [
   },
   {
     title: 'Выплата',
-    dataIndex: 'payout',
-    key: 'payout',
+    dataIndex: 'payment',
+    key: 'payment',
   },
 ];
 
 export default function PaymentsPage() {
   return (
-    <CrmLayout>
-      <div className="payments-page">
-        <Flex className="payments-page__header" justify="space-between" align="center">
-          <Title level={3} className="payments-page__title">Начисления</Title>
-        </Flex>
+    <div className="payments-page">
+      <Title level={2} style={{ marginBottom: 24 }}>
+        Начисления
+      </Title>
 
-        <Flex wrap gap={16} className="payments-page__stats">
-          <Flex vertical style={{ flex: '1 1 calc(33.33% - 11px)', minWidth: 200 }}>
+      <Row gutter={24} style={{ marginBottom: 24 }}>
+        {statsCards.map((card, index) => (
+          <Col key={index} span={6}>
             <Card>
-              <Text type="secondary">Премии</Text>
-              <Title level={4} className="payments-page__stat-value">205 000 ₽</Title>
+              <Text type="secondary" style={{ fontSize: 12 }}>
+                {card.title}
+              </Text>
+              <div style={{ marginTop: 8 }}>
+                <Text strong style={{ fontSize: 24 }}>
+                  {card.value}
+                </Text>
+              </div>
             </Card>
-          </Flex>
-          <Flex vertical style={{ flex: '1 1 calc(33.33% - 11px)', minWidth: 200 }}>
-            <Card>
-              <Text type="secondary">Комиссии</Text>
-              <Title level={4} className="payments-page__stat-value">47 000 ₽</Title>
-            </Card>
-          </Flex>
-        </Flex>
+          </Col>
+        ))}
+      </Row>
 
-        <Flex className="payments-page__toolbar" justify="flex-end">
-          <Button icon={<SortAscendingOutlined />} />
-        </Flex>
-
-        <Card className="payments-page__table-card">
-          <Table
-            columns={columns}
-            dataSource={paymentsData}
-            pagination={false}
-          />
-        </Card>
-      </div>
-    </CrmLayout>
+      <Card
+        extra={
+          <Button.Group>
+            <Button icon={<ArrowUpOutlined />} />
+            <Button icon={<ArrowDownOutlined />} />
+          </Button.Group>
+        }
+      >
+        <Table
+          dataSource={paymentsData}
+          columns={columns}
+          rowKey="id"
+          pagination={{ pageSize: 10 }}
+        />
+      </Card>
+    </div>
   );
 }

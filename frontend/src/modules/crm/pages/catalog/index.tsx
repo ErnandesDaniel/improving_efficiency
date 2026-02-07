@@ -2,180 +2,176 @@
 
 import React from 'react';
 import {
-  Typography,
   Card,
-  Tag,
+  Typography,
+  Row,
+  Col,
   Input,
-  Select,
+  Tag,
   Button,
-  Flex,
-  List,
+  Space,
 } from 'antd';
 import {
   SearchOutlined,
-  SortAscendingOutlined,
+  ArrowUpOutlined,
+  ArrowDownOutlined,
 } from '@ant-design/icons';
-import CrmLayout from '../../components/layout';
-import './index.scss';
 
 const { Title, Text } = Typography;
 
-const productTypeOptions = [
-  { value: 'all', label: 'Все типы' },
-  { value: 'nsg', label: 'НСЖ' },
-  { value: 'isz', label: 'ИСЖ' },
+interface Product {
+  id: number;
+  type: string;
+  commission: string;
+  name: string;
+  description: string;
+  features: string[];
+  audience: string;
+  minAmount: string;
+}
+
+const productsData: Product[] = [
+  {
+    id: 1,
+    type: 'Базовый',
+    commission: 'Комиссия 12%',
+    name: 'Премиум',
+    description: 'Программа накопления с защитой — долгосрочные инвестиции...',
+    features: ['Защита + накопление', 'Поддержка при критических ситуациях', 'Гибкие условия'],
+    audience: 'Взрослые 16-70 лет, заботящиеся о защите семьи',
+    minAmount: '12000',
+  },
+  {
+    id: 2,
+    type: 'Базовый',
+    commission: 'Комиссия 12%',
+    name: 'Премиум 7+',
+    description: 'Программа накопления с дополнительным доходом...',
+    features: ['Защита + накопление', 'Дополнительный доход', 'Программа поддержки'],
+    audience: 'Взрослые 16-63 лет',
+    minAmount: '12000',
+  },
+  {
+    id: 3,
+    type: 'Базовый',
+    commission: 'Комиссия 12%',
+    name: 'Премиум Гарант',
+    description: 'Программа накопления для короткого срока...',
+    features: ['Защита + накопление', 'Программа поддержки', 'Базовый пакет'],
+    audience: 'Взрослые 16-65 лет',
+    minAmount: '12000',
+  },
+  {
+    id: 4,
+    type: 'Базовый',
+    commission: 'Комиссия 10%',
+    name: 'Гранде',
+    description: 'Программа пенсионного накопления с периодом...',
+    features: ['Пенсионная программа', 'Период накопления 9-30 лет', 'Гарантированные выплаты 5-20 лет'],
+    audience: 'Взрослые 18-61 лет, планирующие пенсию',
+    minAmount: '12000',
+  },
+  {
+    id: 5,
+    type: 'Базовый',
+    commission: 'Комиссия 12%',
+    name: 'Солнышко',
+    description: 'Накопления к событию ребенка + защита семьи...',
+    features: ['Накопления к событию ребенка', 'Защита для всей семьи', 'Программа поддержки детей'],
+    audience: 'Родители с детьми до 18 лет',
+    minAmount: '12000',
+  },
+  {
+    id: 6,
+    type: 'Базовый',
+    commission: 'Комиссия 10%',
+    name: 'Оптим',
+    description: 'Доступная программа накопления без медицинских проверок....',
+    features: ['Накопление', 'Возврат средств', 'Базовый пакет услуг'],
+    audience: 'Все категории клиентов 18-70 лет',
+    minAmount: '12000',
+  },
+  {
+    id: 7,
+    type: 'Базовый',
+    commission: 'Комиссия 12%',
+    name: 'Солнышко 7+',
+    description: 'Накопления к событию ребенка с дополнительным доходом...',
+    features: ['Накопления к событию ребенка', 'Дополнительный доход', 'Защита для семьи'],
+    audience: 'Родители 18-63 лет с детьми до 18 лет',
+    minAmount: '12000',
+  },
+  {
+    id: 8,
+    type: 'Базовый',
+    commission: 'Комиссия 12%',
+    name: 'Солнышко Гарант',
+    description: 'Накопления к событию ребенка для короткого срока...',
+    features: ['Накопления к событию ребенка', 'Защита для семьи', 'Поддержка детей'],
+    audience: 'Родители 18-65 лет с детьми до 18 лет',
+    minAmount: '12000',
+  },
 ];
 
-const productsData = [
-  {
-    id: '1',
-    name: 'Премиум',
-    type: 'НСЖ',
-    kv: '12%',
-    description: 'Смешанное страхование жизни — дожитие до конца...',
-    features: ['Защита + дожитие', 'СОЗ-37 (критические заболевания)', 'НС с множеством опций'],
-    targetAudience: 'Взрослые 16-70 лет, заботящиеся о защите семьи',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '2',
-    name: 'Премиум 7+',
-    type: 'НСЖ',
-    kv: '12%',
-    description: 'Смешанное страхование жизни с дополнительным...',
-    features: ['Защита + дожитие', 'Дополнительный доход', 'СОЗ-37'],
-    targetAudience: 'Взрослые 16-63 лет',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '3',
-    name: 'Премиум Гарант',
-    type: 'НСЖ',
-    kv: '12%',
-    description: 'Смешанное страхование жизни для короткого срока...',
-    features: ['Защита + дожитие', 'СОЗ-37', 'НС'],
-    targetAudience: 'Взрослые 16-65 лет',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '4',
-    name: 'Гранде',
-    type: 'НСЖ',
-    kv: '10%',
-    description: 'Программа пенсионного страхования с периодом...',
-    features: ['Пенсионная программа', 'Период накопления 9-30 лет', 'Гарантированные выплаты 5-20 лет'],
-    targetAudience: 'Взрослые 18-61 лет, планирующие пенсию',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '5',
-    name: 'Солнышко',
-    type: 'НСЖ',
-    kv: '12%',
-    description: 'Накопления к событию ребенка + защита двух...',
-    features: ['Накопления к событию ребенка', 'Два застрахованных', 'Защита ребенка'],
-    targetAudience: 'Родители с детьми до 18 лет',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '6',
-    name: 'Оптим',
-    type: 'НСЖ',
-    kv: '10%',
-    description: 'Доступное страхование жизни без андеррайтинга...',
-    features: ['Дожитие', 'Возврат взносов при смерти', 'НС в составе базовой программы'],
-    targetAudience: 'Все категории клиентов 18-70 лет, в т.ч. с проблемами со здоровьем',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '7',
-    name: 'Солнышко 7+',
-    type: 'НСЖ',
-    kv: '12%',
-    description: 'Накопления к событию ребенка с дополнительным...',
-    features: ['Накопления к событию ребенка', 'Дополнительный доход', 'Два застрахованных'],
-    targetAudience: 'Родители 18-63 лет с детьми до 18 лет',
-    minPremium: 12000,
-    color: 'green',
-  },
-  {
-    id: '8',
-    name: 'Солнышко Гарант',
-    type: 'НСЖ',
-    kv: '12%',
-    description: 'Накопления к событию ребенка для короткого...',
-    features: ['Накопления к событию ребенка', 'Два застрахованных', 'Защита ребенка'],
-    targetAudience: 'Родители 18-65 лет с детьми до 18 лет',
-    minPremium: 12000,
-    color: 'green',
-  },
-];
+const ProductCard = ({ product }: { product: Product }) => (
+  <Card style={{ height: '100%' }}>
+    <div style={{ marginBottom: 16 }}>
+      <Tag>{product.type}</Tag>
+      <Tag color="success" style={{ marginLeft: 8 }}>{product.commission}</Tag>
+    </div>
+    <Title level={5} style={{ marginBottom: 8 }}>
+      {product.name}
+    </Title>
+    <Text type="secondary" style={{ fontSize: 12, display: 'block', marginBottom: 12 }}>
+      {product.description}
+    </Text>
+    <div style={{ marginBottom: 16 }}>
+      {product.features.map((feature, index) => (
+        <div key={index} style={{ marginBottom: 4, fontSize: 12 }}>
+          — {feature}
+        </div>
+      ))}
+    </div>
+    <div style={{ borderTop: '1px solid #f0f0f0', paddingTop: 12 }}>
+      <Text type="secondary" style={{ fontSize: 10, display: 'block' }}>ЦЕЛЕВАЯ АУДИТОРИЯ</Text>
+      <Text strong style={{ fontSize: 12 }}>{product.audience}</Text>
+      <div style={{ marginTop: 8 }}>
+        <Text type="secondary" style={{ fontSize: 10, display: 'block' }}>МИН. СУММА</Text>
+        <Text strong style={{ fontSize: 12 }}>{product.minAmount}</Text>
+      </div>
+    </div>
+  </Card>
+);
 
 export default function CatalogPage() {
   return (
-    <CrmLayout>
-      <div className="catalog-page">
-        <Flex className="catalog-page__header" justify="space-between" align="center">
-          <div>
-            <Title level={3} className="catalog-page__title">Каталог продуктов</Title>
-          </div>
-        </Flex>
+    <div className="catalog-page">
+      <Title level={2} style={{ marginBottom: 24 }}>
+        Каталог продуктов
+      </Title>
 
-        <Flex className="catalog-page__filters" wrap gap="small">
+      <Card style={{ marginBottom: 24 }}>
+        <Space>
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
-            className="catalog-page__search-input"
+            style={{ width: 200 }}
           />
-          <Select
-            placeholder="Тип продукта"
-            className="catalog-page__filter-select"
-            options={productTypeOptions}
-          />
-          <Button icon={<SortAscendingOutlined />} />
-        </Flex>
+          <Input placeholder="Тип продукта" style={{ width: 150 }} />
+          <Button.Group>
+            <Button icon={<ArrowUpOutlined />} />
+            <Button icon={<ArrowDownOutlined />} />
+          </Button.Group>
+        </Space>
+      </Card>
 
-        <Flex wrap gap={24} className="catalog-page__grid">
-          {productsData.map((product) => (
-            <Flex key={product.id} vertical style={{ flex: '1 1 calc(25% - 18px)', minWidth: 280 }}>
-              <Card hoverable className="catalog-page__card">
-                <Flex className="catalog-page__card-header" justify="space-between" align="center">
-                  <Tag className="catalog-page__type-tag">{product.type}</Tag>
-                  <Tag color={product.color} className="catalog-page__kv-tag">КВ {product.kv}</Tag>
-                </Flex>
-                
-                <Title level={5} className="catalog-page__product-name">{product.name}</Title>
-                <Text className="catalog-page__description">{product.description}</Text>
-                
-                <List
-                  size="small"
-                  dataSource={product.features}
-                  renderItem={(feature) => (
-                    <List.Item className="catalog-page__feature">— {feature}</List.Item>
-                  )}
-                  className="catalog-page__features-list"
-                />
-                
-                <div className="catalog-page__target-section">
-                  <Text type="secondary" className="catalog-page__target-label">ЦЕЛЕВАЯ АУДИТОРИЯ</Text>
-                  <Text strong className="catalog-page__target-text">{product.targetAudience}</Text>
-                </div>
-                
-                <div className="catalog-page__premium-section">
-                  <Text type="secondary" className="catalog-page__premium-label">МИН. ПРЕМИЯ</Text>
-                  <Text strong className="catalog-page__premium-value">{product.minPremium.toLocaleString()}</Text>
-                </div>
-              </Card>
-            </Flex>
-          ))}
-        </Flex>
-      </div>
-    </CrmLayout>
+      <Row gutter={[24, 24]}>
+        {productsData.map((product) => (
+          <Col key={product.id} span={6}>
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </Row>
+    </div>
   );
 }
