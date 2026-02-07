@@ -122,7 +122,7 @@ export default function DashboardPage() {
   return (
     <div className="dashboard-page">
       <Title level={2} style={{ marginBottom: 24 }}>
-        Доброе утро, Иван! 👋
+        Доброе утро
       </Title>
 
       {/* План от куратора */}
