@@ -5,7 +5,7 @@ export default async function Home() {
   // const session = await auth();
   
   // if (session) {
-    redirect("/main");
+    redirect("/crm/dashboard");
   // } else {
   //   redirect("/auth/login");
   // }
