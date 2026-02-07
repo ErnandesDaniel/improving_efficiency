@@ -84,16 +84,7 @@ export default function AIChat() {
   const [activeTab, setActiveTab] = useState('assistant');
   const [inputValue, setInputValue] = useState('');
   const [messages, setMessages] = useState<Message[]>(initialMessages);
-  const virtuosoRef = useRef<{ scrollToIndex: (args: { index: number; behavior?: 'smooth' | 'auto' }) => void } | null>(null);
-
-  useEffect(() => {
-    if (virtuosoRef.current && messages.length > 0) {
-      virtuosoRef.current.scrollToIndex({
-        index: messages.length - 1,
-        behavior: 'smooth',
-      });
-    }
-  }, [messages]);
+  const virtuosoRef = useRef(null);
 
   const handleSend = () => {
     if (!inputValue.trim()) return;
