@@ -92,10 +92,6 @@ export default function CrmLayout({ children }: CrmLayoutProps) {
     <Layout className="crm-layout">
       <Sider className="crm-layout__sider" width={240}>
         <Flex className="crm-layout__header" vertical>
-          <Flex className="crm-layout__brand" align="center" gap="small">
-            <Title level={5} className="crm-layout__logo">everia</Title>
-            <Text className="crm-layout__subtitle">Агент</Text>
-          </Flex>
           <Flex className="crm-layout__actions" align="center" gap="small">
             <Badge dot color="green">
               <BellOutlined className="crm-layout__icon" />
