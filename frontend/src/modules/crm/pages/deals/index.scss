@@ -1,0 +1,47 @@
+.deals-page {
+  max-width: 1200px;
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__filters {
+    margin-bottom: 24px;
+  }
+
+  &__search-input {
+    width: 200px;
+  }
+
+  &__filter-select {
+    width: 150px;
+
+    &--small {
+      width: 120px;
+    }
+
+    &--medium {
+      width: 140px;
+    }
+  }
+
+  &__stats {
+    margin-bottom: 24px;
+  }
+
+  &__stat-value {
+    margin: 8px 0 0 0;
+  }
+
+  &__badge {
+    margin-left: 4px;
+  }
+
+  &__table-card {
+    margin-top: 24px;
+  }
+}

@@ -1,0 +1,151 @@
+.tasks-page {
+  max-width: 1200px;
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__filters {
+    margin-bottom: 24px;
+  }
+
+  &__search-input {
+    width: 200px;
+  }
+
+  &__filter-select {
+    width: 150px;
+  }
+
+  &__view-toggle {
+    margin-bottom: 24px;
+  }
+
+  &__table-card {
+    margin-top: 24px;
+  }
+
+  &__task-card {
+    .tasks-page__task-title {
+      margin-top: 8px;
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.week-calendar {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__header {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__grid {
+    display: flex;
+  }
+
+  &__time-column {
+    width: 80px;
+    border-right: 1px solid #f0f0f0;
+  }
+
+  &__time-header {
+    height: 50px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  &__time-slot {
+    height: 60px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #8c8c8c;
+    font-size: 12px;
+  }
+
+  &__days {
+    flex: 1;
+    display: flex;
+  }
+
+  &__day {
+    flex: 1;
+    border-right: 1px solid #f0f0f0;
+
+    &:last-child {
+      border-right: none;
+    }
+
+    &--today {
+      background: #e6f7ff;
+    }
+  }
+
+  &__day-header {
+    height: 50px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fafafa;
+
+    &--today {
+      background: #1890ff;
+    }
+  }
+
+  &__day-text {
+    font-size: 12px;
+    color: #8c8c8c;
+
+    &--today {
+      color: #fff;
+    }
+  }
+
+  &__today-label {
+    font-size: 10px;
+    color: #fff;
+  }
+
+  &__hour-slot {
+    height: 60px;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 4px;
+    position: relative;
+  }
+
+  &__task {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+
+    &--purple {
+      background: #f9f0ff;
+      border-left: 3px solid #722ed1;
+    }
+
+    &--red {
+      background: #fff2f0;
+      border-left: 3px solid #ff4d4f;
+    }
+
+    &-title {
+      font-size: 11px;
+    }
+  }
+}

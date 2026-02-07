@@ -1,0 +1,48 @@
+.news-page {
+  max-width: 1200px;
+
+  &__header {
+    margin-bottom: 24px;
+  }
+
+  &__title {
+    margin: 0 0 8px 0;
+  }
+
+  &__subtitle {
+    font-size: 14px;
+  }
+
+  &__tabs {
+    margin-bottom: 24px;
+  }
+
+  &__grid {
+    margin-bottom: 24px;
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__card-header {
+    margin-bottom: 12px;
+  }
+
+  &__category {
+    font-size: 12px;
+  }
+
+  &__date {
+    font-size: 12px;
+  }
+
+  &__card-title {
+    display: block;
+    font-size: 14px;
+  }
+
+  &__footer {
+    margin-top: 24px;
+  }
+}

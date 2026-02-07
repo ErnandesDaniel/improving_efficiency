@@ -1,0 +1,162 @@
+.dashboard-page {
+  max-width: 1200px;
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__greeting {
+    margin: 0;
+  }
+
+  &__plan-card {
+    margin-bottom: 24px;
+  }
+
+  &__plan-stats {
+    margin-top: 16px;
+  }
+
+  &__divider {
+    height: 40px;
+  }
+
+  &__plan-label {
+    font-size: 12px;
+  }
+
+  &__tasks-card {
+    margin-bottom: 24px;
+  }
+
+  &__section-title {
+    margin-bottom: 16px;
+  }
+
+  &__task-item {
+    padding: 12px 0;
+  }
+
+  &__task-icon {
+    color: #1890ff;
+  }
+
+  &__task-time {
+    display: block;
+    font-size: 12px;
+  }
+
+  &__clock-icon {
+    margin-right: 4px;
+  }
+
+  &__two-column {
+    margin-bottom: 24px;
+  }
+
+  &__card {
+    height: 100%;
+  }
+
+  &__study-item {
+    width: 100%;
+  }
+
+  &__study-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  &__study-icon {
+    font-size: 24px;
+
+    &--orange {
+      color: #fa8c16;
+    }
+
+    &--blue {
+      color: #1890ff;
+    }
+  }
+
+  &__study-content {
+    flex: 1;
+  }
+
+  &__study-title {
+    display: block;
+  }
+
+  &__study-type {
+    font-size: 12px;
+  }
+
+  &__payment-item {
+    width: 100%;
+  }
+
+  &__payment-content {
+    flex: 1;
+  }
+
+  &__payment-name {
+    display: block;
+  }
+
+  &__payment-type {
+    font-size: 12px;
+  }
+
+  &__payment-status {
+    font-size: 12px;
+  }
+
+  &__progress-row {
+    margin-bottom: 24px;
+  }
+
+  &__progress-wrapper {
+    margin-bottom: 16px;
+  }
+
+  &__stat-number {
+    margin: 0;
+  }
+
+  &__stat-label {
+    font-size: 12px;
+  }
+
+  &__earnings-divider {
+    margin: 16px 0;
+  }
+
+  &__news-card {
+    margin-top: 24px;
+  }
+
+  &__news-list {
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+
+  &__news-item {
+    min-width: 280px;
+    flex-shrink: 0;
+  }
+
+  &__news-category {
+    font-size: 11px;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  &__news-title {
+    display: block;
+  }
+}

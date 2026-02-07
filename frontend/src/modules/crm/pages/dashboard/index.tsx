@@ -8,10 +8,9 @@ import {
   Col,
   Progress,
   Avatar,
-  Badge,
   List,
   Button,
-  Space,
+  Flex,
   Divider,
 } from 'antd';
 import {
@@ -20,37 +19,33 @@ import {
   MessageOutlined,
   PlayCircleOutlined,
   ClockCircleOutlined,
-  CheckCircleOutlined,
   RiseOutlined,
-  DollarOutlined,
-  UserOutlined,
-  FileTextOutlined,
 } from '@ant-design/icons';
 import CrmLayout from '../../components/layout';
+import './index.scss';
 
 const { Title, Text } = Typography;
 
-// Моковые данные
 const studyRecommendations = [
   {
     id: '1',
     title: 'Быстрый старт: первые шаги агента',
     type: 'Обязательный',
-    icon: <PlayCircleOutlined style={{ color: '#fa8c16', fontSize: 24 }} />,
+    icon: <PlayCircleOutlined className="dashboard-page__study-icon dashboard-page__study-icon--orange" />,
     color: '#fff7e6',
   },
   {
     id: '2',
     title: 'Этика и комплаенс',
     type: 'Обязательный',
-    icon: <BookOutlined style={{ color: '#fa8c16', fontSize: 24 }} />,
+    icon: <BookOutlined className="dashboard-page__study-icon dashboard-page__study-icon--orange" />,
     color: '#fff7e6',
   },
   {
     id: '3',
     title: 'Техники продаж',
     type: 'Рекомендованный',
-    icon: <RiseOutlined style={{ color: '#1890ff', fontSize: 24 }} />,
+    icon: <RiseOutlined className="dashboard-page__study-icon dashboard-page__study-icon--blue" />,
     color: '#e6f7ff',
   },
 ];
@@ -61,7 +56,6 @@ const upcomingPayments = [
     name: 'Константинопольский К.К.',
     type: 'Договор',
     status: 'Просрочено',
-    statusColor: 'red',
     avatar: 'КК',
     avatarColor: '#52c41a',
   },
@@ -70,7 +64,6 @@ const upcomingPayments = [
     name: 'Васильков К.А.',
     type: 'Договор',
     status: 'Просрочено',
-    statusColor: 'red',
     avatar: 'ВК',
     avatarColor: '#eb2f96',
   },
@@ -79,7 +72,6 @@ const upcomingPayments = [
     name: 'Фёдорова О.С.',
     type: 'Договор',
     status: 'Просрочено',
-    statusColor: 'red',
     avatar: 'ФО',
     avatarColor: '#722ed1',
   },
@@ -90,7 +82,7 @@ const todayTasks = [
     id: '1',
     title: 'Узнать решение',
     time: 'Вчера, 09:00 - 09:00',
-    icon: <MessageOutlined style={{ color: '#1890ff' }} />,
+    icon: <MessageOutlined className="dashboard-page__task-icon" />,
   },
 ];
 
@@ -125,103 +117,88 @@ const newsItems = [
 export default function DashboardPage() {
   return (
     <CrmLayout>
-      <div style={{ maxWidth: 1200 }}>
-        {/* Header */}
-        <div style={{ marginBottom: 32 }}>
-          <Title level={3} style={{ margin: 0 }}>
+      <div className="dashboard-page">
+        <div className="dashboard-page__header">
+          <Title level={3} className="dashboard-page__greeting">
             Доброе утро, Иван! 👋
           </Title>
         </div>
 
-        {/* Curator Plan */}
-        <Card style={{ marginBottom: 24 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
-            <Text strong>План от куратора на месяц</Text>
-          </div>
-          <Space size="large" split={<Divider type="vertical" style={{ height: 40 }} />}>
+        <Card className="dashboard-page__plan-card">
+          <Text strong>План от куратора на месяц</Text>
+          <Flex className="dashboard-page__plan-stats" split={<Divider type="vertical" className="dashboard-page__divider" />}>
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>0 из 0 новых лиц</Text>
+              <Text type="secondary" className="dashboard-page__plan-label">0 из 0 новых лиц</Text>
             </div>
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>0 из 0 отправлено КП</Text>
+              <Text type="secondary" className="dashboard-page__plan-label">0 из 0 отправлено КП</Text>
             </div>
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>0 из 0 заключено сделок</Text>
+              <Text type="secondary" className="dashboard-page__plan-label">0 из 0 заключено сделок</Text>
             </div>
             <div>
-              <Text type="secondary" style={{ fontSize: 12 }}>Факт / план по премии: 0 ₽ / 0 ₽</Text>
+              <Text type="secondary" className="dashboard-page__plan-label">Факт / план по премии: 0 ₽ / 0 ₽</Text>
             </div>
-          </Space>
+          </Flex>
         </Card>
 
-        {/* Today's Tasks */}
-        <Card style={{ marginBottom: 24 }}>
-          <Title level={5} style={{ marginBottom: 16 }}>Задачи на сегодня</Title>
+        <Card className="dashboard-page__tasks-card">
+          <Title level={5} className="dashboard-page__section-title">Задачи на сегодня</Title>
           {todayTasks.map(task => (
-            <div key={task.id} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 0' }}>
+            <Flex key={task.id} className="dashboard-page__task-item" align="center" gap="small">
               {task.icon}
               <div>
-                <Text style={{ display: 'block' }}>{task.title}</Text>
-                <Text type="secondary" style={{ fontSize: 12 }}>
-                  <ClockCircleOutlined style={{ marginRight: 4 }} />
+                <Text>{task.title}</Text>
+                <Text type="secondary" className="dashboard-page__task-time">
+                  <ClockCircleOutlined className="dashboard-page__clock-icon" />
                   {task.time}
                 </Text>
               </div>
-            </div>
+            </Flex>
           ))}
         </Card>
 
-        {/* Two Column Layout */}
-        <Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
-          {/* Study Recommendations */}
+        <Row gutter={[24, 24]} className="dashboard-page__two-column">
           <Col xs={24} lg={12}>
-            <Card title="Рекомендуем к изучению">
+            <Card title="Рекомендуем к изучению" className="dashboard-page__card">
               <List
                 itemLayout="horizontal"
                 dataSource={studyRecommendations}
                 renderItem={(item) => (
                   <List.Item>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 16, width: '100%' }}>
+                    <Flex className="dashboard-page__study-item" align="center" gap="middle">
                       <div
-                        style={{
-                          width: 48,
-                          height: 48,
-                          borderRadius: 8,
-                          background: item.color,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                        }}
+                        className="dashboard-page__study-icon-wrapper"
+                        style={{ background: item.color }}
                       >
                         {item.icon}
                       </div>
-                      <div style={{ flex: 1 }}>
-                        <Text strong style={{ display: 'block' }}>{item.title}</Text>
-                        <Text type="secondary" style={{ fontSize: 12 }}>{item.type}</Text>
+                      <div className="dashboard-page__study-content">
+                        <Text strong className="dashboard-page__study-title">{item.title}</Text>
+                        <Text type="secondary" className="dashboard-page__study-type">{item.type}</Text>
                       </div>
-                    </div>
+                    </Flex>
                   </List.Item>
                 )}
               />
             </Card>
           </Col>
 
-          {/* Upcoming Payments */}
           <Col xs={24} lg={12}>
-            <Card title="Скоро платёж">
+            <Card title="Скоро платёж" className="dashboard-page__card">
               <List
                 itemLayout="horizontal"
                 dataSource={upcomingPayments}
                 renderItem={(item) => (
                   <List.Item>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 12, width: '100%' }}>
+                    <Flex className="dashboard-page__payment-item" align="center" gap="small">
                       <Avatar style={{ backgroundColor: item.avatarColor }}>{item.avatar}</Avatar>
-                      <div style={{ flex: 1 }}>
-                        <Text strong style={{ display: 'block' }}>{item.name}</Text>
-                        <Text type="secondary" style={{ fontSize: 12 }}>{item.type}</Text>
+                      <div className="dashboard-page__payment-content">
+                        <Text strong className="dashboard-page__payment-name">{item.name}</Text>
+                        <Text type="secondary" className="dashboard-page__payment-type">{item.type}</Text>
                       </div>
-                      <Text type="danger" style={{ fontSize: 12 }}>{item.status}</Text>
-                    </div>
+                      <Text type="danger" className="dashboard-page__payment-status">{item.status}</Text>
+                    </Flex>
                   </List.Item>
                 )}
               />
@@ -229,60 +206,56 @@ export default function DashboardPage() {
           </Col>
         </Row>
 
-        {/* Progress Row */}
-        <Row gutter={[24, 24]} style={{ marginBottom: 24 }}>
-          {/* Education Progress */}
+        <Row gutter={[24, 24]} className="dashboard-page__progress-row">
           <Col xs={24} lg={12}>
-            <Card title="План по образованию">
-              <div style={{ marginBottom: 16 }}>
+            <Card title="План по образованию" className="dashboard-page__card">
+              <div className="dashboard-page__progress-wrapper">
                 <Progress percent={84} strokeColor="#52c41a" showInfo={false} />
               </div>
               <Row>
                 <Col span={12}>
-                  <Title level={4} style={{ margin: 0 }}>3 из 12</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Пройдено курсов</Text>
+                  <Title level={4} className="dashboard-page__stat-number">3 из 12</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">Пройдено курсов</Text>
                 </Col>
                 <Col span={12}>
-                  <Title level={4} style={{ margin: 0 }}>84%</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Средний балл</Text>
+                  <Title level={4} className="dashboard-page__stat-number">84%</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">Средний балл</Text>
                 </Col>
               </Row>
             </Card>
           </Col>
 
-          {/* My Earnings */}
           <Col xs={24} lg={12}>
-            <Card title="Мои начисления">
+            <Card title="Мои начисления" className="dashboard-page__card">
               <Row gutter={16}>
                 <Col span={8}>
-                  <Title level={4} style={{ margin: 0 }}>47 тыс. ₽</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Текущий заработок</Text>
+                  <Title level={4} className="dashboard-page__stat-number">47 тыс. ₽</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">Текущий заработок</Text>
                 </Col>
                 <Col span={8}>
-                  <Title level={4} style={{ margin: 0 }}>14 тыс. ₽</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>К выплате</Text>
+                  <Title level={4} className="dashboard-page__stat-number">14 тыс. ₽</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">К выплате</Text>
                 </Col>
                 <Col span={8}>
-                  <Title level={4} style={{ margin: 0 }}>33 тыс. ₽</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Выплачено</Text>
+                  <Title level={4} className="dashboard-page__stat-number">33 тыс. ₽</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">Выплачено</Text>
                 </Col>
               </Row>
-              <Divider style={{ margin: '16px 0' }} />
+              <Divider className="dashboard-page__earnings-divider" />
               <Row gutter={16}>
                 <Col span={8}>
-                  <Title level={4} style={{ margin: 0 }}>4%</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>КВ</Text>
+                  <Title level={4} className="dashboard-page__stat-number">4%</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">КВ</Text>
                 </Col>
                 <Col span={8}>
-                  <Title level={4} style={{ margin: 0 }}>89%</Title>
-                  <Text type="secondary" style={{ fontSize: 12 }}>Рейтинг</Text>
+                  <Title level={4} className="dashboard-page__stat-number">89%</Title>
+                  <Text type="secondary" className="dashboard-page__stat-label">Рейтинг</Text>
                 </Col>
               </Row>
             </Card>
           </Col>
         </Row>
 
-        {/* News Section */}
         <Card
           title="Новости"
           extra={
@@ -290,24 +263,21 @@ export default function DashboardPage() {
               Все новости
             </Button>
           }
+          className="dashboard-page__news-card"
         >
-          <div style={{ display: 'flex', gap: 16, overflowX: 'auto', paddingBottom: 8 }}>
+          <Flex className="dashboard-page__news-list" gap="middle">
             {newsItems.map((news) => (
               <Card
                 key={news.id}
                 hoverable
-                style={{ minWidth: 280, flexShrink: 0 }}
+                className="dashboard-page__news-item"
                 size="small"
               >
-                <Text type="secondary" style={{ fontSize: 11, display: 'block', marginBottom: 8 }}>
-                  {news.category}
-                </Text>
-                <Text strong style={{ display: 'block' }}>
-                  {news.title}
-                </Text>
+                <Text type="secondary" className="dashboard-page__news-category">{news.category}</Text>
+                <Text strong className="dashboard-page__news-title">{news.title}</Text>
               </Card>
             ))}
-          </div>
+          </Flex>
         </Card>
       </div>
     </CrmLayout>

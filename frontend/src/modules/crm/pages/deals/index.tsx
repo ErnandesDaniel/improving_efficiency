@@ -7,7 +7,7 @@ import {
   Card,
   Table,
   Tag,
-  Space,
+  Flex,
   Row,
   Col,
   Input,
@@ -21,9 +21,39 @@ import {
   ArrowUpOutlined,
 } from '@ant-design/icons';
 import CrmLayout from '../../components/layout';
+import './index.scss';
 
 const { Title, Text } = Typography;
-const { Option } = Select;
+
+const statusFilterOptions = [
+  { value: 'open', label: 'Только открытые' },
+  { value: 'all', label: 'Все сделки' },
+  { value: 'closed', label: 'Закрытые' },
+];
+
+const productFilterOptions = [
+  { value: 'premium', label: 'Премиум' },
+  { value: 'sunny', label: 'Солнышко' },
+  { value: 'gloria', label: 'Глория' },
+];
+
+const forecastFilterOptions = [
+  { value: 'high', label: 'Высокий' },
+  { value: 'medium', label: 'Средний' },
+  { value: 'low', label: 'Низкий' },
+];
+
+const updatedFilterOptions = [
+  { value: 'today', label: 'Сегодня' },
+  { value: 'week', label: 'Неделя' },
+  { value: 'month', label: 'Месяц' },
+];
+
+const stageFilterOptions = [
+  { value: 'kp', label: 'КП' },
+  { value: 'payment', label: 'Оплата' },
+  { value: 'signing', label: 'Подписание' },
+];
 
 interface Deal {
   key: string;
@@ -151,115 +181,89 @@ export default function DealsPage() {
 
   return (
     <CrmLayout>
-      <div style={{ maxWidth: 1200 }}>
-        {/* Header */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: 24,
-          }}
-        >
-          <Title level={3} style={{ margin: 0 }}>
-            Сделки
-          </Title>
+      <div className="deals-page">
+        <Flex className="deals-page__header" justify="space-between" align="center">
+          <Title level={3} className="deals-page__title">Сделки</Title>
           <Button type="primary" icon={<PlusOutlined />} size="large">
             Создать
           </Button>
-        </div>
+        </Flex>
 
-        {/* Filters */}
-        <Space style={{ marginBottom: 24 }} wrap>
+        <Flex className="deals-page__filters" wrap gap="small">
           <Input
             placeholder="Поиск"
             prefix={<SearchOutlined />}
-            style={{ width: 200 }}
+            className="deals-page__search-input"
           />
           <Select
             defaultValue="open"
-            style={{ width: 150 }}
             suffixIcon={<FilterOutlined />}
-          >
-            <Option value="open">Только открытые</Option>
-            <Option value="all">Все сделки</Option>
-            <Option value="closed">Закрытые</Option>
-          </Select>
-          <Select placeholder="Продукт" style={{ width: 120 }}>
-            <Option value="premium">Премиум</Option>
-            <Option value="sunny">Солнышко</Option>
-            <Option value="gloria">Глория</Option>
-          </Select>
-          <Select placeholder="Прогноз" style={{ width: 120 }}>
-            <Option value="high">Высокий</Option>
-            <Option value="medium">Средний</Option>
-            <Option value="low">Низкий</Option>
-          </Select>
-          <Select placeholder="Обновлена" style={{ width: 120 }}>
-            <Option value="today">Сегодня</Option>
-            <Option value="week">Неделя</Option>
-            <Option value="month">Месяц</Option>
-          </Select>
-          <Select placeholder="Этап воронки" style={{ width: 140 }}>
-            <Option value="kp">КП</Option>
-            <Option value="payment">Оплата</Option>
-            <Option value="signing">Подписание</Option>
-          </Select>
+            className="deals-page__filter-select"
+            options={statusFilterOptions}
+          />
+          <Select
+            placeholder="Продукт"
+            className="deals-page__filter-select deals-page__filter-select--small"
+            options={productFilterOptions}
+          />
+          <Select
+            placeholder="Прогноз"
+            className="deals-page__filter-select deals-page__filter-select--small"
+            options={forecastFilterOptions}
+          />
+          <Select
+            placeholder="Обновлена"
+            className="deals-page__filter-select deals-page__filter-select--small"
+            options={updatedFilterOptions}
+          />
+          <Select
+            placeholder="Этап воронки"
+            className="deals-page__filter-select deals-page__filter-select--medium"
+            options={stageFilterOptions}
+          />
           <Button icon={<ArrowUpOutlined />} />
-        </Space>
+        </Flex>
 
-        {/* Stats Cards */}
-        <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Row gutter={[16, 16]} className="deals-page__stats">
           <Col xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary">Цель на месяц</Text>
-              <Title level={4} style={{ margin: '8px 0 0 0' }}>
-                —
-              </Title>
+              <Title level={4} className="deals-page__stat-value">—</Title>
             </Card>
           </Col>
           <Col xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary">
-                Прогноз до конца месяца{' '}
-                <Badge status="processing" style={{ marginLeft: 4 }} />
+                Прогноз до конца месяца
+                <Badge status="processing" className="deals-page__badge" />
               </Text>
-              <Title level={4} style={{ margin: '8px 0 0 0' }}>
-                5 940 ₽
-              </Title>
+              <Title level={4} className="deals-page__stat-value">5 940 ₽</Title>
             </Card>
           </Col>
           <Col xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary">Продано с начала месяца</Text>
-              <Title level={4} style={{ margin: '8px 0 0 0' }}>
-                0 ₽
-              </Title>
+              <Title level={4} className="deals-page__stat-value">0 ₽</Title>
             </Card>
           </Col>
           <Col xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary">КП отправлено / в работе</Text>
-              <Title level={4} style={{ margin: '8px 0 0 0' }}>
-                0 / 1
-              </Title>
+              <Title level={4} className="deals-page__stat-value">0 / 1</Title>
             </Card>
           </Col>
         </Row>
 
-        <Row gutter={[16, 16]} style={{ marginBottom: 24 }}>
+        <Row gutter={[16, 16]} className="deals-page__stats">
           <Col xs={24} sm={12} md={6}>
             <Card>
               <Text type="secondary">Средний цикл сделки</Text>
-              <Title level={4} style={{ margin: '8px 0 0 0' }}>
-                —
-              </Title>
+              <Title level={4} className="deals-page__stat-value">—</Title>
             </Card>
           </Col>
         </Row>
 
-        {/* Table */}
-        <Card>
+        <Card className="deals-page__table-card">
           <Table
             rowSelection={rowSelection}
             columns={columns}
